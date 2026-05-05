@@ -389,6 +389,36 @@
   iframe {
     max-width: 100%;
     height: auto;
+   .wordsearch-box,
+.wordsearch-container,
+.puzzle-box {
+  width: calc(100vw - 32px);
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 28px 18px;
+  overflow: hidden;
+}
+
+.wordsearch-grid,
+.puzzle,
+.grid {
+  width: 100%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 22px 10px;
+}
+
+.wordsearch-grid div,
+.puzzle div,
+.grid div,
+.letter {
+  width: auto;
+  min-width: 0;
+  font-size: clamp(24px, 8vw, 40px);
+  text-align: center;
+  line-height: 1;
+}
   }
 }
 </style>
