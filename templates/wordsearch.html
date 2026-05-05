@@ -399,6 +399,10 @@
     font-size: clamp(14px, 5vw, 24px);
     line-height: 1;
     padding: 0;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
   }
 
   .hint-row {
@@ -420,7 +424,7 @@
 
     <div class="instructions">
       Her portfolio is hiding inside the puzzle.<br>
-      Click each letter in order to find the secret words.<br>
+      Swipe each letter in order to find the secret words.<br>
       Find: <strong>BERNICE</strong> + <strong>PORTFOLIO</strong>
     </div>
 
@@ -532,24 +536,70 @@ let foundWords = [];
 
 const grid = document.getElementById("grid");
 
-letters.flat().forEach((letter) => {
+let isDragging = false;
+
+letters.flat().forEach((letter, index) => {
   const cell = document.createElement("button");
   cell.className = "cell";
   cell.type = "button";
   cell.textContent = letter;
   cell.setAttribute("aria-label", letter);
+  cell.dataset.index = index;
 
-  cell.addEventListener("click", () => {
-    if (cell.classList.contains("found")) return;
+  cell.addEventListener("mousedown", startSwipe);
+  cell.addEventListener("mouseenter", continueSwipe);
+  cell.addEventListener("mouseup", endSwipe);
 
-    cell.classList.add("selected");
-    selectedLetters += letter;
-    selectedCells.push(cell);
-    checkWord();
-  });
+  cell.addEventListener("touchstart", startSwipe, { passive: false });
+  cell.addEventListener("touchmove", touchMove, { passive: false });
+  cell.addEventListener("touchend", endSwipe);
 
   grid.appendChild(cell);
 });
+
+document.addEventListener("mouseup", endSwipe);
+
+function startSwipe(e) {
+  e.preventDefault();
+
+  if (e.currentTarget.classList.contains("found")) return;
+
+  resetSelection();
+  isDragging = true;
+  addCell(e.currentTarget);
+}
+
+function continueSwipe(e) {
+  if (!isDragging) return;
+  addCell(e.currentTarget);
+}
+
+function touchMove(e) {
+  if (!isDragging) return;
+  e.preventDefault();
+
+  const touch = e.touches[0];
+  const element = document.elementFromPoint(touch.clientX, touch.clientY);
+
+  if (element && element.classList.contains("cell")) {
+    addCell(element);
+  }
+}
+
+function addCell(cell) {
+  if (cell.classList.contains("found")) return;
+  if (selectedCells.includes(cell)) return;
+
+  cell.classList.add("selected");
+  selectedLetters += cell.textContent;
+  selectedCells.push(cell);
+}
+
+function endSwipe() {
+  if (!isDragging) return;
+  isDragging = false;
+  checkWord();
+}
 
 function resetSelection() {
   selectedCells.forEach(cell => cell.classList.remove("selected"));
