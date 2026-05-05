@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <a href="https://www.browserbaby.site" class="bb-home">
-  ← choose another world
 </a>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -413,18 +411,103 @@
     .checkout .pill { display: inline-block; margin-top: 18px; font-size: 18px; }
     .footer { color:#fff; text-align: center; font-weight: 900; padding-bottom: 32px; }
 
-    @media (max-width: 850px) {
-      .entry-wrap { min-height: 720px; grid-template-columns: 1fr; align-content: start; padding-top: 22px; }
-      .entry-title { font-size: clamp(58px, 20vw, 110px); }
-      .entry-fruit { left: 50%; bottom: 190px; width: 360px; opacity: .9; }
-      .snack-shelf { grid-template-columns: repeat(2, 1fr); margin-top: 220px; }
-      .cart-panel { position: relative; right: auto; bottom: auto; width: 100%; transform: rotate(0deg); }
-      .hero { grid-template-columns: 1fr; padding-top: 24px; }
-      .nutrition-card { margin: 10px auto 0; }
-      .basket-grid, .work-grid { grid-template-columns: 1fr; }
-      .basket-item:nth-child(n) { grid-column: auto; }
-      .section { margin: 44px 0; }
-    }
+  @media (max-width: 850px) {
+  .bb-home {
+    top: 48px;
+    left: 12px;
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .entry-screen {
+    padding: 62px 14px 18px;
+    overflow-y: auto;
+    place-items: start center;
+  }
+
+  .entry-wrap {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding-top: 0;
+    align-items: start;
+  }
+
+  .entry-kicker {
+    margin-top: 8px;
+    font-size: 9px;
+    gap: 8px;
+  }
+
+  .entry-title {
+    font-size: clamp(54px, 20vw, 92px);
+    line-height: .82;
+    position: relative;
+    z-index: 3;
+  }
+
+  .entry-fruit {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    width: min(260px, 72vw);
+    margin: -8px auto 8px;
+    z-index: 1;
+  }
+
+  .entry-instructions {
+    margin: 10px auto 0;
+    font-size: 14px;
+    text-align: center;
+    transform: rotate(-1deg);
+  }
+
+  .snack-shelf {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 0;
+    gap: 10px;
+  }
+
+  .snack-item {
+    min-height: 92px;
+    padding: 10px;
+  }
+
+  .snack-item strong {
+    font-size: 17px;
+  }
+
+  .snack-item span {
+    font-size: 28px;
+  }
+
+  .cart-panel {
+    transform: rotate(0deg);
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 24px;
+  }
+
+  .nutrition-card {
+    margin: 10px auto 0;
+  }
+
+  .basket-grid,
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .basket-item:nth-child(n) {
+    grid-column: auto;
+  }
+
+  .section {
+    margin: 44px 0;
+  }
+}
   </style>
 </head>
 <body class="locked">
@@ -437,7 +520,9 @@
         <div class="entry-fruit" aria-hidden="true"></div>
         <p class="entry-instructions">pick 3 flavors that match your design taste</p>
       </div>
-
+<a href="https://www.browserbaby.site" class="bb-home">
+  ← choose another world
+</a>
       <div>
       <div class="snack-shelf" aria-label="Choose flavors">
         <button class="snack-item" data-item="bold"><strong>bold</strong><span>🍅</span></button>
