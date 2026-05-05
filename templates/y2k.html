@@ -1,1 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browser Baby — Y2K Portfolio Template</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    body {
+      min-height: 100vh;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M4 3 L22 15 L14 17 L10 25 L4 3 Z' fill='%23ff8fd1' stroke='%23331b36' stroke-width='1.5'/%3E%3Ccircle cx='19' cy='8' r='3' fill='%23fff2a8' stroke='%23331b36' stroke-width='1'/%3E%3C/svg%3E") 4 3, auto;
+      overflow-x: hidden;
+      font-family: Georgia, 'Times New Roman', serif;
+      color: #1f1a1d;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 221, 244, 0.95), transparent 28%),
+        radial-gradient(circle at 80% 15%, rgba(255, 246, 181, 0.95), transparent 24%),
+        radial-gradient(circle at 50% 80%, rgba(209, 231, 255, 0.9), transparent 34%),
+        linear-gradient(135deg, #fff8fb 0%, #fbe6f2 48%, #eaf6ff 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.45) 1px, transparent 1px);
+      background-size: 36px 36px;
+      opacity: .35;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+    }
+
+    .top-bar {
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      border-bottom: 1px solid rgba(108, 75, 101, .25);
+      background: rgba(255, 244, 252, .78);
+      backdrop-filter: blur(8px);
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+    }
+
+    .top-bar span {
+      margin-right: 18px;
+    }
+
+    .landing {
+      min-height: calc(100vh - 38px);
+      display: grid;
+      place-items: center;
+      padding: 48px 18px;
+      transition: transform .8s ease, opacity .8s ease, filter .8s ease;
+    }
+
+    body.zooming .landing {
+      transform: scale(1.18);
+      opacity: 0;
+      filter: blur(7px);
+    }
+
+    .landing-card {
+      width: min(1040px, 94vw);
+      min-height: 640px;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      place-items: center;
+      padding: 50px 24px 70px;
+      border: 2px solid rgba(137, 92, 128, .25);
+      background: rgba(255, 255, 248, .68);
+      box-shadow: 0 24px 80px rgba(122, 69, 112, .18);
+      overflow: hidden;
+    }
+
+    .script-logo {
+      position: absolute;
+      top: 42px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      font-family: 'Brush Script MT', 'Snell Roundhand', cursive;
+      font-size: clamp(42px, 8vw, 88px);
+      font-weight: 400;
+      color: rgba(35, 28, 31, .68);
+      white-space: nowrap;
+      animation: logoShimmer 3.2s ease-in-out infinite;
+      text-shadow:
+        1px 1px 0 #fff,
+        4px 4px 0 rgba(255, 143, 209, .22),
+        -3px -2px 0 rgba(190, 229, 255, .36);
+    }
+
+    .script-logo::after {
+      content: "✦";
+      position: absolute;
+      right: -34px;
+      top: 6px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 30px;
+      color: #ff8fd1;
+      animation: sparkleBlink 1.4s ease-in-out infinite;
+    }
+
+    .headline {
+      position: absolute;
+      top: 150px;
+      width: min(860px, 88%);
+      text-align: center;
+      font-size: clamp(30px, 5vw, 64px);
+      line-height: 1.18;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+
+    .headline em {
+      text-transform: lowercase;
+      font-weight: 400;
+      font-style: italic;
+      font-size: .88em;
+    }
+
+    .ibook-wrap {
+      margin-top: 300px;
+      position: relative;
+      width: min(360px, 72vw);
+      cursor: pointer;
+      animation: float 3.4s ease-in-out infinite;
+      filter: drop-shadow(0 16px 18px rgba(151, 69, 126, .18));
+    }
+
+    .ibook-wrap:hover {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cpath d='M6 5 L27 18 L18 20 L13 30 L6 5 Z' fill='%23fff2a8' stroke='%23331b36' stroke-width='1.7'/%3E%3Cpath d='M23 5 L25.5 10 L31 11 L26.8 14.5 L28 20 L23 17.2 L18 20 L19.2 14.5 L15 11 L20.5 10 Z' fill='%23ff8fd1' stroke='%23331b36' stroke-width='1'/%3E%3C/svg%3E") 6 5, pointer;
+    }
+
+    .ibook-wrap:hover {
+      transform: scale(1.04);
+    }
+
+    .click-label {
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      font-size: clamp(20px, 4vw, 34px);
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(115, 25, 86, .7);
+      pointer-events: none;
+    }
+
+    .ibook {
+      width: 100%;
+      position: relative;
+    }
+
+    .ibook-img {
+      width: 100%;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* clickable screen area */
+    .screen-hitbox {
+      position: absolute;
+      left: 18%;
+      top: 14%;
+      width: 64%;
+      height: 50%;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+    }
+
+    .click-label {
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      font-size: clamp(20px, 4vw, 34px);
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(115, 25, 86, .8);
+      pointer-events: none;
+    }
+
+    .folder {
+      position: absolute;
+      width: 110px;
+      height: 80px;
+      opacity: 0;
+      pointer-events: none;
+      cursor: pointer;
+      z-index: 4;
+      left: 50%;
+      top: 68%;
+      transform: translate(-50%, -50%) scale(.35) rotate(0deg);
+      transition: left .8s cubic-bezier(.16, 1, .3, 1), top .8s cubic-bezier(.16, 1, .3, 1), right .8s cubic-bezier(.16, 1, .3, 1), bottom .8s cubic-bezier(.16, 1, .3, 1), opacity .45s ease, transform .8s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    body.folders-out .folder {
+      opacity: .95;
+      pointer-events: auto;
+    }
+
+    .folder:hover {
+      filter: brightness(1.04) drop-shadow(0 8px 8px rgba(90, 40, 80, .18));
+    }
+
+    .folder::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 48px;
+      height: 18px;
+      border-radius: 8px 8px 0 0;
+      background: inherit;
+      border: 2px solid rgba(89,66,31,.15);
+      border-bottom: none;
+    }
+
+    .folder::after {
+      content: "";
+      position: absolute;
+      top: 14px;
+      left: 0;
+      width: 100%;
+      height: 58px;
+      border-radius: 8px;
+      background: inherit;
+      border: 2px solid rgba(89,66,31,.15);
+    }
+
+    .folder p {
+      position: absolute;
+      top: 86px;
+      width: 140px;
+      left: -15px;
+      text-align: center;
+      font-size: 18px;
+      text-shadow: 1px 1px #fff;
+    }
+
+    .folder.left { background: #d8bf7a; }
+    .folder.right { background: #f7afd1; }
+    .folder.bottom-left { background: #799433; }
+    .folder.bottom-right { background: #ead19a; }
+    .folder.resume { background: #bfe4ff; }
+
+    body.folders-out .folder.left { left: 12%; top: 52%; transform: translate(0, 0) scale(1) rotate(-4deg); }
+    body.folders-out .folder.right { left: auto; right: 12%; top: 52%; transform: translate(0, 0) scale(1) rotate(4deg); }
+    body.folders-out .folder.resume { left: 32%; top: auto; bottom: 13%; transform: translate(0, 0) scale(1) rotate(-1deg); }
+    body.folders-out .folder.bottom-right { left: auto; right: 32%; top: auto; bottom: 13%; transform: translate(0, 0) scale(1) rotate(-3deg); }
+
+
+    .desktop {
+      display: none;
+      min-height: calc(100vh - 38px);
+      padding: 28px;
+      font-family: 'Courier New', monospace;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(255,255,255,.45), transparent 20%),
+        linear-gradient(135deg, #f4c5e1, #bde4ff 55%, #fff4a6);
+    }
+
+    body.desktop-open .landing { display: none; }
+    body.desktop-open .desktop { display: block; }
+
+    body.folders-out .click-label {
+      font-size: 0;
+      opacity: .78;
+    }
+
+    body.folders-out .click-label::after {
+      content: "pick a folder";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 220px;
+      text-align: center;
+      font-size: clamp(18px, 3vw, 28px);
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background: rgba(255,255,255,.6);
+      border: 1px solid #7b2e69;
+      padding: 6px 12px;
+      font-family: 'Courier New', monospace;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,.9);
+    }
+
+    .desktop-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(36px, 6vw, 82px);
+      margin: 8px 0 28px;
+      text-align: center;
+      text-shadow: 2px 2px #fff;
+    }
+
+    .desktop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 30px;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .desk-icon {
+      text-align: center;
+      cursor: pointer;
+      padding: 12px;
+      border: 1px dotted transparent;
+    }
+
+    .desk-icon:hover {
+      border-color: #7b2e69;
+      background: rgba(255,255,255,.28);
+    }
+
+    .desk-folder {
+      width: 82px;
+      height: 58px;
+      margin: 0 auto 10px;
+      position: relative;
+      background: #ffe08a;
+      border: 2px solid #8b6f2e;
+      border-radius: 6px;
+      box-shadow: 3px 3px 0 rgba(0,0,0,.12);
+    }
+
+    .desk-folder::before {
+      content: "";
+      position: absolute;
+      left: -2px;
+      top: -16px;
+      width: 38px;
+      height: 16px;
+      background: #ffe08a;
+      border: 2px solid #8b6f2e;
+      border-bottom: none;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .window {
+      display: none;
+      width: min(680px, 92vw);
+      min-height: 310px;
+      margin: 34px auto 0;
+      border: 2px solid #34243a;
+      background: #fffdf7;
+      box-shadow: 10px 10px 0 rgba(68, 34, 89, .22);
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    .window.open { display: block; }
+
+    .window-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 10px;
+      color: white;
+      background: linear-gradient(90deg, #8c3fba, #ff76b8);
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+
+    .close {
+      border: 1px solid #fff;
+      padding: 1px 8px;
+      cursor: pointer;
+      background: rgba(255,255,255,.18);
+    }
+
+    .window-content {
+      padding: 28px;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .window-content h2 {
+      font-size: 34px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .download-btn {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 10px 14px;
+      border: 2px solid #34243a;
+      background: linear-gradient(135deg, #ffd6ef, #fff2a8);
+      color: #34243a;
+      text-decoration: none;
+      font-family: 'Courier New', monospace;
+      box-shadow: 4px 4px 0 rgba(68, 34, 89, .2);
+    }
+
+    .download-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 6px 6px 0 rgba(68, 34, 89, .22);
+    }
+
+    .file-note {
+      margin-top: 14px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      background: rgba(255, 214, 239, .45);
+      padding: 10px;
+      border: 1px dashed #7b2e69;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes logoShimmer {
+      0%, 100% {
+        transform: translateX(-50%) rotate(-2deg) scale(1);
+        filter: hue-rotate(0deg) brightness(1);
+      }
+      50% {
+        transform: translateX(-50%) rotate(1deg) scale(1.035);
+        filter: hue-rotate(12deg) brightness(1.08);
+      }
+    }
+
+    @keyframes sparkleBlink {
+      0%, 100% { opacity: .25; transform: rotate(0deg) scale(.8); }
+      50% { opacity: 1; transform: rotate(18deg) scale(1.2); }
+    }
+
+    @media (max-width: 760px) {
+      .landing-card {
+        min-height: 670px;
+        padding-top: 34px;
+      }
+
+      .headline {
+        top: 150px;
+      }
+
+      .ibook-wrap {
+        margin-top: 220px;
+      }
+
+      .folder {
+        transform: scale(.72);
+      }
+
+      body.folders-out .folder.left { left: 2%; top: 55%; }
+      body.folders-out .folder.right { right: 2%; top: 55%; }
+      body.folders-out .folder.resume { left: 18%; bottom: 8%; }
+      body.folders-out .folder.bottom-right { right: 18%; bottom: 8%; }
+    }
+  </style>
+</head>
+<body>
+  <audio id="startupSound" preload="auto">
+    <source src="sounds/startup.mp3" type="audio/mpeg" />
+    <source src="sounds/startup.wav" type="audio/wav" />
+  </audio>
+  <div class="page">
+    <div class="top-bar">
+      <div><span>File</span><span>Edit</span><span>View</span><span>Special</span></div>
+      <div>Browser Baby OS ✦</div>
+    </div>
+
+    <main class="landing" id="landing">
+      <section class="landing-card">
+        <div class="script-logo">Browser Baby portfolio</div>
+
+        <h1 class="headline">Hi! I’m a <em>creative internet girl</em><br />with a portfolio worth clicking</h1>
+
+
+        <div class="folder left" data-window="work"><p>my work</p></div>
+        <div class="folder right" data-window="about"><p>about me</p></div>
+        <div class="folder resume" data-window="resume"><p>resume</p></div>
+        <div class="folder bottom-right" data-window="contact"><p>contact</p></div>
+
+        <div class="ibook-wrap" id="enterDesktop" aria-label="Enter portfolio desktop" role="button" tabindex="0">
+          <div class="click-label">click me</div>
+          <div class="ibook">
+            <img class="ibook-img" src="/mnt/data/e668e117cb1bf4704d712fae30d8fef6-removebg-preview.png" alt="pink ibook" />
+            <div class="screen-hitbox"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <main class="desktop" id="desktop">
+      <button class="back-btn" id="backToLanding">← back</button>
+      <h1 class="desktop-title">welcome to my desktop</h1>
+
+      <section class="desktop-grid">
+        <div class="desk-icon" data-window="about">
+          <div class="desk-folder"></div>
+          <p>about me</p>
+        </div>
+        <div class="desk-icon" data-window="work">
+          <div class="desk-folder"></div>
+          <p>my work</p>
+        </div>
+        <div class="desk-icon" data-window="resume">
+          <div class="desk-folder"></div>
+          <p>resume</p>
+        </div>
+        <div class="desk-icon" data-window="contact">
+          <div class="desk-folder"></div>
+          <p>contact</p>
+        </div>
+      </section>
+
+      <article class="window" id="window">
+        <div class="window-bar">
+          <span id="windowTitle">about me</span>
+          <button class="close" id="closeWindow">x</button>
+        </div>
+        <div class="window-content" id="windowContent"></div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const enterDesktop = document.getElementById('enterDesktop');
+    const body = document.body;
+    const windowBox = document.getElementById('window');
+    const windowTitle = document.getElementById('windowTitle');
+    const windowContent = document.getElementById('windowContent');
+    const closeWindow = document.getElementById('closeWindow');
+    const backBtn = document.getElementById('backToLanding');
+    const startupSound = document.getElementById('startupSound');
+
+    const pages = {
+      about: {
+        title: 'about me',
+        html: `<h2>About Me</h2><p>This is where the client’s story goes. Keep it personal, editorial, and charming — less LinkedIn bio, more internet diary meets professional proof.</p>`
+      },
+      work: {
+        title: 'my work',
+        html: `<h2>My Work</h2><p>Add 3–6 featured projects here. Each one can open into its own case study, gallery, or mini scrapbook page.</p>`
+      },
+      
+      resume: {
+        title: 'resume',
+        html: `<h2>Resume</h2><p>Add a short resume summary here: role, experience, strongest skills, and what kind of work they are looking for.</p><a class="download-btn" href="files/resume.pdf" target="_blank" rel="noopener">download resume.pdf</a>`
+      },
+      contact: {
+        title: 'contact me baby',
+        html: `<h2>Contact</h2><p>Email, Instagram, booking links, newsletter, or a tiny form can live here. Make it feel like sending a note through cyberspace.</p>`
+      }
+    };
+
+    function openDesktop(startWindow) {
+      body.classList.add('zooming');
+      setTimeout(() => {
+        body.classList.remove('zooming');
+        body.classList.add('desktop-open');
+
+        if (startWindow && pages[startWindow]) {
+          const page = pages[startWindow];
+          windowTitle.textContent = page.title;
+          windowContent.innerHTML = page.html;
+          windowBox.classList.add('open');
+        }
+      }, 720);
+    }
+
+    function playStartupSound() {
+      startupSound.currentTime = 0;
+      startupSound.play().catch(() => {
+        // Browsers sometimes block sound if the file is missing or not triggered by a click.
+      });
+    }
+
+    function releaseFolders() {
+      playStartupSound();
+      body.classList.add('folders-out');
+    }
+
+    enterDesktop.addEventListener('click', releaseFolders);
+    enterDesktop.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') releaseFolders();
+    });
+
+    document.querySelectorAll('.landing .folder').forEach(folder => {
+      folder.addEventListener('click', () => {
+        openDesktop(folder.dataset.window);
+      });
+    });
+
+    document.querySelectorAll('.desk-icon').forEach(icon => {
+      icon.addEventListener('click', () => {
+        const page = pages[icon.dataset.window];
+        windowTitle.textContent = page.title;
+        windowContent.innerHTML = page.html;
+        windowBox.classList.add('open');
+      });
+    });
+
+    closeWindow.addEventListener('click', () => {
+      windowBox.classList.remove('open');
+    });
+
+    backBtn.addEventListener('click', () => {
+      body.classList.remove('desktop-open');
+      body.classList.remove('folders-out');
+    });
+  </script>
+</body>
+</html>

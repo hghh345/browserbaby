@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Find Bernice’s Portfolio</title>
+
+<style>
+  * { box-sizing: border-box; }
+
+  :root {
+    --blue: #08a9df;
+    --yellow: #ffd51f;
+    --green: #09b653;
+    --cream: #fff9e8;
+    --black: #050505;
+    --pink: #ff8fd5;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--blue);
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  button, a { font-family: inherit; }
+
+  .screen {
+    min-height: 100vh;
+    padding: 28px;
+  }
+
+  .center-stage {
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hello {
+    font-size: clamp(38px, 7vw, 78px);
+    font-weight: 900;
+    font-style: italic;
+    line-height: 0.9;
+    margin-top: 18px;
+  }
+
+  .main-title {
+    font-size: clamp(52px, 11vw, 116px);
+    margin: 0;
+    color: var(--yellow);
+    -webkit-text-stroke: 3px var(--black);
+    text-shadow: 6px 6px 0 var(--black);
+    line-height: 0.88;
+  }
+
+  .sub-title {
+    display: inline-block;
+    background: var(--cream);
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+    border-radius: 999px;
+    padding: 10px 20px;
+    margin: 24px auto 14px;
+    font-size: clamp(18px, 3vw, 26px);
+    font-weight: 900;
+  }
+
+  .instructions {
+    background: var(--cream);
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+    border-radius: 24px;
+    padding: 16px 18px;
+    margin: 12px auto 24px;
+    font-size: 18px;
+    max-width: 640px;
+    line-height: 1.35;
+  }
+
+  .instructions strong {
+    background: var(--yellow);
+    border: 2px solid var(--black);
+    border-radius: 999px;
+    padding: 2px 8px;
+    white-space: nowrap;
+  }
+
+  .board {
+    background: var(--cream);
+    border: 4px solid var(--black);
+    box-shadow: 12px 12px 0 var(--black);
+    border-radius: 32px;
+    padding: clamp(14px, 4vw, 28px);
+    margin: 0 auto;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: clamp(4px, 1.4vw, 10px);
+  }
+
+  .cell {
+    aspect-ratio: 1;
+    border: 0;
+    background: transparent;
+    font-size: clamp(22px, 5.3vw, 46px);
+    font-weight: 900;
+    cursor: pointer;
+    border-radius: 999px;
+    transition: transform 120ms ease, background 120ms ease;
+  }
+
+  .cell:hover { transform: scale(1.08); }
+
+  .cell.selected,
+  .cell.found {
+    background: var(--green);
+    outline: 3px solid var(--black);
+  }
+
+  .hint-row {
+    margin: 18px auto 0;
+    font-weight: 900;
+    font-size: 16px;
+  }
+
+  #enterBtn {
+    display: none;
+    margin-top: 30px;
+    padding: 16px 28px;
+    border: 3px solid var(--black);
+    background: var(--yellow);
+    box-shadow: 6px 6px 0 var(--black);
+    border-radius: 999px;
+    font-size: 24px;
+    font-weight: 900;
+    cursor: pointer;
+  }
+
+  #enterBtn:hover { transform: translate(2px, 2px); box-shadow: 4px 4px 0 var(--black); }
+
+  .pop {
+    display: none;
+    background: var(--pink);
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+    border-radius: 22px;
+    max-width: 500px;
+    margin: 22px auto 0;
+    padding: 14px;
+    font-weight: 900;
+    font-size: 20px;
+  }
+
+  /* PORTFOLIO PAGE */
+  #portfolioPage { display: none; }
+
+  .portfolio-shell {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .top-nav {
+    position: sticky;
+    top: 12px;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: var(--cream);
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+    border-radius: 999px;
+    padding: 10px 14px;
+    margin-bottom: 30px;
+  }
+
+  .logo-pill {
+    font-weight: 900;
+    background: var(--yellow);
+    border: 2px solid var(--black);
+    border-radius: 999px;
+    padding: 8px 14px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .nav-links a, .back-btn {
+    color: var(--black);
+    text-decoration: none;
+    font-weight: 900;
+    border: 2px solid var(--black);
+    border-radius: 999px;
+    padding: 8px 12px;
+    background: white;
+    cursor: pointer;
+  }
+
+  .hero-card {
+    background: var(--cream);
+    border: 4px solid var(--black);
+    box-shadow: 12px 12px 0 var(--black);
+    border-radius: 34px;
+    padding: clamp(24px, 5vw, 52px);
+    margin-bottom: 26px;
+  }
+
+  .portfolio-title {
+    font-size: clamp(52px, 10vw, 110px);
+    line-height: 0.9;
+    margin: 0 0 20px;
+    color: var(--yellow);
+    -webkit-text-stroke: 3px var(--black);
+    text-shadow: 6px 6px 0 var(--black);
+  }
+
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+
+  .about-box, .quick-box, .section-card, .project-card {
+    background: white;
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+    border-radius: 26px;
+    padding: 22px;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    background: var(--green);
+    border: 2px solid var(--black);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-weight: 900;
+    margin-bottom: 12px;
+  }
+
+  .about-box p, .section-card p, .project-card p, .quick-box p {
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .found-heading {
+    display: inline-block;
+    background: var(--green);
+    border: 3px solid var(--black);
+    border-radius: 999px;
+    padding: 8px 18px;
+    margin: 34px 0 18px;
+    font-size: clamp(30px, 5vw, 52px);
+    box-shadow: 6px 6px 0 var(--black);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .project-card h3 {
+    font-size: 30px;
+    margin: 0 0 10px;
+  }
+
+  .project-thumb {
+    min-height: 150px;
+    border: 3px solid var(--black);
+    border-radius: 22px;
+    background:
+      radial-gradient(circle at 20% 20%, var(--yellow) 0 12%, transparent 13%),
+      radial-gradient(circle at 80% 30%, var(--pink) 0 10%, transparent 11%),
+      linear-gradient(135deg, #ffffff, #dff7ff);
+    margin-bottom: 16px;
+  }
+
+  .tag-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+
+  .tag {
+    background: var(--yellow);
+    border: 2px solid var(--black);
+    border-radius: 999px;
+    padding: 4px 9px;
+    font-weight: 900;
+    font-size: 14px;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .contact-card {
+    text-align: center;
+    background: var(--yellow);
+    border: 4px solid var(--black);
+    box-shadow: 12px 12px 0 var(--black);
+    border-radius: 34px;
+    padding: 34px;
+    margin: 34px 0;
+  }
+
+  .contact-card a {
+    color: var(--black);
+    font-size: 28px;
+    font-weight: 900;
+  }
+
+  @media (max-width: 800px) {
+    .intro-grid, .project-grid, .two-col { grid-template-columns: 1fr; }
+    .top-nav { align-items: flex-start; border-radius: 26px; flex-direction: column; }
+    .nav-links { justify-content: flex-start; }
+  }
+</style>
+</head>
+
+<body>
+
+<section class="screen" id="gamePage">
+  <div class="center-stage">
+    <div class="hello">♥ Hello ♥</div>
+    <h1 class="main-title">You Found Me</h1>
+
+    <div class="sub-title">Find Bernice’s Portfolio</div>
+
+    <div class="instructions">
+      Your portfolio is hiding inside the puzzle.<br>
+      Click each letter in order to find the secret words.<br>
+      Find: <strong>BERNICE</strong> + <strong>PORTFOLIO</strong>
+    </div>
+
+    <div class="board">
+      <div class="grid" id="grid"></div>
+      <div class="hint-row">hint: one word is on the top row, one word is near the bottom ✨</div>
+    </div>
+
+    <div class="pop" id="successPop">you found the portal, baby ✨</div>
+    <button id="enterBtn">enter portfolio →</button>
+  </div>
+</section>
+
+<section class="screen" id="portfolioPage">
+  <div class="portfolio-shell">
+    <nav class="top-nav">
+      <div class="logo-pill">Bernice’s Portfolio</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <button class="back-btn" id="backBtn">Puzzle</button>
+      </div>
+    </nav>
+
+    <header class="hero-card">
+      <span class="eyebrow">portfolio unlocked</span>
+      <h1 class="portfolio-title">Good Thing You Found Bernice.</h1>
+      <div class="intro-grid">
+        <div class="about-box" id="about">
+          <span class="eyebrow">ABOUT</span>
+          <p>Bernice is a designer, visual thinker, and internet world-builder creating identities, digital experiences, and visual systems that feel clear, memorable, and a little bit magnetic.</p>
+          <p>This is where the client can introduce who they are, what they make, who they help, and why their work matters.</p>
+        </div>
+        <div class="quick-box">
+          <span class="eyebrow">CURRENTLY</span>
+          <p><strong>Available for:</strong><br>Brand design, web design, art direction, campaigns, visual storytelling, and portfolio collaborations.</p>
+          <div class="tag-row">
+            <span class="tag">Branding</span>
+            <span class="tag">Web</span>
+            <span class="tag">Editorial</span>
+            <span class="tag">Strategy</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <h2 class="found-heading" id="work">FOUND WORK</h2>
+    <div class="project-grid">
+      <article class="project-card">
+        <div class="project-thumb"></div>
+        <h3>Project One</h3>
+        <p>A short case study intro goes here. Explain the challenge, the idea, and the result in 2–3 sentences.</p>
+        <div class="tag-row"><span class="tag">Identity</span><span class="tag">Launch</span></div>
+      </article>
+      <article class="project-card">
+        <div class="project-thumb"></div>
+        <h3>Project Two</h3>
+        <p>A second project can live here with a thumbnail, role, collaborators, and a link to the full work.</p>
+        <div class="tag-row"><span class="tag">Web</span><span class="tag">UX</span></div>
+      </article>
+      <article class="project-card">
+        <div class="project-thumb"></div>
+        <h3>Project Three</h3>
+        <p>Use this space for a campaign, selected visuals, a brand system, or a client transformation story.</p>
+        <div class="tag-row"><span class="tag">Art Direction</span><span class="tag">Social</span></div>
+      </article>
+    </div>
+
+    <h2 class="found-heading" id="services">FOUND SKILLS</h2>
+    <div class="two-col">
+      <div class="section-card">
+        <span class="eyebrow">SERVICES</span>
+        <p>Brand identity, portfolio websites, visual systems, creative direction, content concepts, launch campaigns, pitch decks, and digital experiences.</p>
+      </div>
+      <div class="section-card">
+        <span class="eyebrow">RESUME / PRESS</span>
+        <p>Add a resume download, press links, selected clients, exhibitions, awards, education, or previous collaborators here.</p>
+      </div>
+    </div>
+
+    <div class="contact-card" id="contact">
+      <span class="eyebrow">CONTACT FOUND</span>
+      <h2>Ready to make something people remember?</h2>
+      <p>Email Bernice for projects, collaborations, and design magic.</p>
+      <a href="mailto:hello@example.com">hello@example.com</a>
+    </div>
+  </div>
+</section>
+
+<script>
+const letters = [
+  ["S","B","E","R","N","I","C","E","G","S"],
+  ["D","S","L","W","N","E","E","D","S","X"],
+  ["F","T","M","P","T","O","S","H","Y","M"],
+  ["S","B","S","F","G","K","Q","D","S","B"],
+  ["A","V","S","T","O","P","B","C","W","Q"],
+  ["I","Q","R","G","W","C","M","F","P","V"],
+  ["S","P","O","R","T","F","O","L","I","O"],
+  ["O","U","R","S","E","L","V","E","S","P"],
+  ["A","S","D","F","G","H","J","K","C","L"]
+];
+
+const words = ["BERNICE", "PORTFOLIO"];
+let selectedLetters = "";
+let selectedCells = [];
+let foundWords = [];
+
+const grid = document.getElementById("grid");
+
+letters.flat().forEach((letter) => {
+  const cell = document.createElement("button");
+  cell.className = "cell";
+  cell.type = "button";
+  cell.textContent = letter;
+  cell.setAttribute("aria-label", letter);
+
+  cell.addEventListener("click", () => {
+    if (cell.classList.contains("found")) return;
+
+    cell.classList.add("selected");
+    selectedLetters += letter;
+    selectedCells.push(cell);
+    checkWord();
+  });
+
+  grid.appendChild(cell);
+});
+
+function resetSelection() {
+  selectedCells.forEach(cell => cell.classList.remove("selected"));
+  selectedLetters = "";
+  selectedCells = [];
+}
+
+function checkWord() {
+  words.forEach(word => {
+    if (selectedLetters === word && !foundWords.includes(word)) {
+      foundWords.push(word);
+      selectedCells.forEach(cell => {
+        cell.classList.remove("selected");
+        cell.classList.add("found");
+      });
+      selectedLetters = "";
+      selectedCells = [];
+    }
+  });
+
+  const couldStillBeWord = words.some(word => word.startsWith(selectedLetters));
+  if (!couldStillBeWord && selectedLetters.length > 0) {
+    setTimeout(resetSelection, 180);
+  }
+
+  if (foundWords.length === words.length) {
+    document.getElementById("successPop").style.display = "block";
+    document.getElementById("enterBtn").style.display = "inline-block";
+  }
+}
+
+document.getElementById("enterBtn").addEventListener("click", () => {
+  document.getElementById("gamePage").style.display = "none";
+  document.getElementById("portfolioPage").style.display = "block";
+  window.scrollTo(0,0);
+});
+
+document.getElementById("backBtn").addEventListener("click", () => {
+  document.getElementById("portfolioPage").style.display = "none";
+  document.getElementById("gamePage").style.display = "block";
+  window.scrollTo(0,0);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Yummy Portfolio | Browser Baby</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #111;
+      background: #2f5fd0;
+      overflow-x: hidden;
+    }
+
+    body.locked { overflow: hidden; }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ADD TO CART ENTRY SCREEN */
+    .entry-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: #2f5fd0;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      overflow: hidden;
+      transition: opacity .7s ease, transform .7s ease, visibility .7s ease;
+    }
+
+    .entry-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.04);
+      pointer-events: none;
+    }
+
+    .entry-noise {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .18;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.7) 0 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
+      background-size: 5px 5px, 22px 22px;
+      mix-blend-mode: screen;
+    }
+
+    .entry-wrap {
+      width: min(1060px, 100%);
+      min-height: 650px;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 48px; /* increased spacing */
+      align-items: start;
+    }
+
+    .entry-copy { position: relative; z-index: 2; }
+
+    .entry-kicker {
+      display: flex;
+      justify-content: space-between;
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: 18px;
+      opacity: .9;
+    }
+
+    .entry-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-style: italic;
+      font-size: clamp(72px, 13vw, 176px);
+      line-height: .78;
+      letter-spacing: -0.09em;
+      text-shadow: 0 0 16px rgba(255,255,255,.34);
+      position: relative;
+      z-index: 2;
+    }
+
+    .entry-fruit {
+      position: absolute;
+      width: min(520px, 70vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      left: 25%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      background:
+        radial-gradient(circle at 44% 40%, rgba(255,255,255,.22) 0 2%, transparent 22%),
+        radial-gradient(circle at 52% 53%, #ff563e 0 55%, #e73223 56% 68%, #a91f18 69% 100%);
+      border: 3px solid rgba(0,0,0,.15);
+      box-shadow: inset -25px -32px 0 rgba(70,0,0,.25), 0 20px 60px rgba(0,0,0,.25);
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .entry-fruit::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 1.6px);
+      background-size: 5px 5px;
+      opacity: .46;
+      mix-blend-mode: screen;
+    }
+
+    .entry-fruit::after {
+      content: "✦";
+      position: absolute;
+      top: -26px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-8deg);
+      color: #28c846;
+      font-size: 115px;
+      text-shadow: 0 4px 0 #087b21;
+    }
+
+    .entry-instructions {
+      position: relative;
+      z-index: 3;
+      width: fit-content;
+      margin-top: 22px;
+      background: #fff;
+      color: #111;
+      border: 3px solid #111;
+      padding: 13px 18px;
+      font-weight: 900;
+      box-shadow: 7px 7px 0 rgba(0,0,0,.9);
+      transform: rotate(-1deg);
+    }
+
+    .snack-shelf {
+      position: relative;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      gap: 14px;
+      align-self: center;
+    }
+
+    .snack-item {
+      cursor: pointer;
+      border: 3px solid #111;
+      min-height: 118px;
+      padding: 13px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #111;
+      box-shadow: 7px 7px 0 rgba(0,0,0,.9);
+      transition: transform .18s ease, opacity .18s ease, box-shadow .18s ease;
+      user-select: none;
+    }
+
+    .snack-item:hover { transform: translateY(-7px) rotate(-2deg); }
+    .snack-item.added { opacity: .42; transform: scale(.92) rotate(4deg); box-shadow: 2px 2px 0 rgba(0,0,0,.9); pointer-events: none; }
+
+    .snack-item strong {
+      font-size: 21px;
+      line-height: .92;
+      text-transform: uppercase;
+      letter-spacing: -0.05em;
+    }
+
+    .snack-item span {
+      align-self: flex-end;
+      font-size: 35px;
+    }
+
+    .snack-item:nth-child(1) { background: #fff36e; }
+    .snack-item:nth-child(2) { background: #ff7b3d; }
+    .snack-item:nth-child(3) { background: #ffd4e6; }
+    .snack-item:nth-child(4) { background: #f6fff0; }
+
+    .cart-panel {
+      position: relative;
+      width: 100%;
+      background: #f36522;
+      border: 4px solid #111;
+      box-shadow: 10px 10px 0 rgba(0,0,0,.9);
+      padding: 18px;
+      color: #111;
+      transform: rotate(1deg);
+    }
+
+    .cart-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .cart-basket {
+      min-height: 118px;
+      border: 3px solid #111;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.2) 16px, transparent 17px),
+        linear-gradient(rgba(255,255,255,.2) 16px, transparent 17px),
+        #ff8b42;
+      background-size: 33px 33px;
+      padding: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      gap: 8px;
+    }
+
+    .cart-chip {
+      background: #fff8ae;
+      border: 2px solid #111;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 900;
+      animation: pop .2s ease both;
+    }
+
+    @keyframes pop { from { transform: scale(.7); } to { transform: scale(1); } }
+
+    .enter-site {
+      width: 100%;
+      margin-top: 12px;
+      border: 3px solid #111;
+      background: #111;
+      color: #fff8ae;
+      padding: 14px 18px;
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+      opacity: .35;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .enter-site.ready {
+      opacity: 1;
+      pointer-events: auto;
+      animation: pulse .8s ease infinite alternate;
+    }
+
+    .enter-site.ready:hover { transform: rotate(-2deg) scale(1.03); }
+
+    @keyframes pulse { from { box-shadow: 0 0 0 #fff8ae; } to { box-shadow: 0 0 22px #fff8ae; } }
+
+    .cart-note {
+      margin-top: 8px;
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .marquee {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #fff8ae;
+      border-bottom: 3px solid #111;
+      overflow: hidden;
+      white-space: nowrap;
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .marquee span { display: inline-block; padding: 9px 0; animation: slide 18s linear infinite; }
+    @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .page { width: min(1120px, calc(100% - 28px)); margin: 0 auto; padding: 72px 0 40px; position: relative; z-index: 1; }
+
+    .hero { min-height: 92vh; display: grid; grid-template-columns: 1fr .8fr; align-items: center; gap: 36px; color: #fff; }
+
+    .eyebrow {
+      display: inline-block;
+      background: #fff;
+      color: #111;
+      border: 3px solid #111;
+      padding: 9px 18px;
+      font-weight: 900;
+      box-shadow: 6px 6px 0 #111;
+      transform: rotate(-3deg);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-style: italic;
+      font-size: clamp(62px, 10vw, 150px);
+      line-height: .8;
+      letter-spacing: -0.09em;
+      text-shadow: 0 0 18px rgba(255,255,255,.45);
+      max-width: 760px;
+    }
+
+    .subtitle {
+      margin-top: 24px;
+      max-width: 580px;
+      background: #fff;
+      color: #111;
+      border: 3px solid #111;
+      padding: 15px 19px;
+      font-family: "Courier New", monospace;
+      font-size: clamp(14px, 1.6vw, 18px);
+      line-height: 1.2;
+      box-shadow: 7px 7px 0 rgba(0,0,0,.88);
+      font-weight: 900;
+    }
+
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+
+    .pill {
+      border: 3px solid #111;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 900;
+      font-style: italic;
+      box-shadow: 4px 4px 0 #111;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .pill:hover { transform: translate(3px, 3px) rotate(-2deg); box-shadow: 1px 1px 0 #111; }
+    .pink { background: #ffd0e3; color:#111; } .cream { background: #fff8ae; color:#111; } .brown { background: #351714; color: #fff8ae; } .orange { background: #ff6b1a; color: #fff8ae; }
+
+    .nutrition-card { background: #fff; color:#111; border: 4px solid #111; box-shadow: 12px 12px 0 rgba(0,0,0,.92); padding: 14px; width: min(440px, 100%); transform: rotate(1.5deg); margin-left: auto; position: relative; }
+    .nutrition-title { font-size: clamp(38px, 5vw, 58px); letter-spacing: -0.08em; line-height: .9; font-weight: 900; border-bottom: 15px solid #111; padding-bottom: 8px; margin-bottom: 6px; }
+    .label-row { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; border-bottom: 2px solid #111; font-size: 15px; }
+    .label-row.big { border-bottom: 7px solid #111; font-weight: 900; font-size: 17px; }
+    .label-row.indent { padding-left: 24px; font-size: 14px; }
+    .daily { text-align: right; font-size: 11px; font-weight: 900; padding: 5px 0; border-bottom: 2px solid #111; }
+    .tiny-note { font-size: 10px; line-height: 1.2; margin-top: 7px; font-family: Georgia, serif; }
+
+    .section { margin: 80px 0; background: #fff; border: 4px solid #111; box-shadow: 10px 10px 0 rgba(0,0,0,.82); padding: clamp(22px, 4vw, 44px); position: relative; }
+    .section-title { font-size: clamp(36px, 6vw, 76px); line-height: .86; letter-spacing: -0.08em; text-transform: uppercase; margin-bottom: 24px; }
+
+    .basket-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; }
+    .basket-item {
+      min-height: 110px;
+      border: 3px solid #111;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 14px;
+      font-weight: 900;
+      font-style: italic;
+      box-shadow: 5px 5px 0 #111;
+      transition: transform .16s ease;
+      position: relative;
+      border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%;
+      overflow: hidden;
+    }
+
+    .basket-item::after {
+      content: "";
+      position: absolute;
+      top: -8px;
+      width: 10px;
+      height: 16px;
+      background: #2e7d32;
+      border: 2px solid #111;
+      border-radius: 6px;
+      transform: rotate(-10deg);
+    }
+
+    .basket-item:hover {
+      transform: translateY(-7px) rotate(-3deg) scale(1.05);
+    }
+    .basket-item:nth-child(1), .basket-item:nth-child(4) { grid-column: span 2; background: #ff4d4d; color: #fff8ae; }
+    .basket-item:nth-child(1) { border-radius: 50% 50% 45% 55% / 55% 45% 60% 40%; } /* apple */
+    .basket-item:nth-child(4) { border-radius: 60% 40% 60% 40% / 60% 50% 50% 40%; } /* tomato */
+    .basket-item:nth-child(2), .basket-item:nth-child(5) { grid-column: span 2; background: #ffd84d; }
+    .basket-item:nth-child(2) { border-radius: 60% 40% 60% 40% / 40% 60% 40% 60%; } /* lemon */
+    .basket-item:nth-child(5) { border-radius: 50% 60% 50% 60% / 60% 50% 60% 50%; }
+    .basket-item:nth-child(3), .basket-item:nth-child(6) { grid-column: span 2; background: #ff99cc; }
+    .basket-item:nth-child(3) { border-radius: 55% 45% 60% 40% / 60% 40% 55% 45%; } /* strawberry */
+    .basket-item:nth-child(6) { border-radius: 45% 55% 40% 60% / 50% 60% 40% 50%; }
+    .basket-item:nth-child(7), .basket-item:nth-child(8) { grid-column: span 3; background: #ff914d; color: #fff8ae; }
+    .basket-item:nth-child(7) { border-radius: 60% 40% 55% 45% / 45% 55% 50% 50%; }
+    .basket-item:nth-child(8) { border-radius: 40% 60% 50% 50% / 55% 45% 60% 40%; }
+
+    .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .work-card { min-height: 340px; border: 3px solid #111; background: #fff; overflow: hidden; box-shadow: 6px 6px 0 #111; transition: transform .16s ease; }
+    .work-card:hover { transform: rotate(2deg) scale(1.02); }
+    .work-top { height: 230px; display: grid; place-items: center; font-size: 78px; background: #fff36e; border-bottom: 3px solid #111; }
+    .work-card:nth-child(2) .work-top { background: #ff7b3d; }
+    .work-card:nth-child(3) .work-top { background: #d8f7ff; }
+    .work-info { padding: 18px; }
+    .work-info h3 { font-size: 24px; line-height: .95; margin-bottom: 8px; }
+
+    .receipt { background: #fffef4; border: 3px dashed #111; padding: 25px; font-family: "Courier New", monospace; box-shadow: 8px 8px 0 rgba(0,0,0,.25); }
+    .receipt-line { display: flex; justify-content: space-between; border-bottom: 1px dotted #111; padding: 9px 0; gap: 18px; }
+    .checkout { text-align: center; background: #ffd0e3; }
+    .checkout .pill { display: inline-block; margin-top: 18px; font-size: 18px; }
+    .footer { color:#fff; text-align: center; font-weight: 900; padding-bottom: 32px; }
+
+    @media (max-width: 850px) {
+      .entry-wrap { min-height: 720px; grid-template-columns: 1fr; align-content: start; padding-top: 22px; }
+      .entry-title { font-size: clamp(58px, 20vw, 110px); }
+      .entry-fruit { left: 50%; bottom: 190px; width: 360px; opacity: .9; }
+      .snack-shelf { grid-template-columns: repeat(2, 1fr); margin-top: 220px; }
+      .cart-panel { position: relative; right: auto; bottom: auto; width: 100%; transform: rotate(0deg); }
+      .hero { grid-template-columns: 1fr; padding-top: 24px; }
+      .nutrition-card { margin: 10px auto 0; }
+      .basket-grid, .work-grid { grid-template-columns: 1fr; }
+      .basket-item:nth-child(n) { grid-column: auto; }
+      .section { margin: 44px 0; }
+    }
+  </style>
+</head>
+<body class="locked">
+  <section class="entry-screen" id="entryScreen">
+    <div class="entry-noise"></div>
+    <div class="entry-wrap">
+      <div class="entry-copy">
+        <div class="entry-kicker"><span>2005</span><span>Browser Baby Grocery</span><span>Fresh Drop</span></div>
+        <h1 class="entry-title">curate your flavor</h1>
+        <div class="entry-fruit" aria-hidden="true"></div>
+        <p class="entry-instructions">pick 3 flavors that match your design taste</p>
+      </div>
+
+      <div>
+      <div class="snack-shelf" aria-label="Choose flavors">
+        <button class="snack-item" data-item="bold"><strong>bold</strong><span>🍅</span></button>
+        <button class="snack-item" data-item="minimal"><strong>minimal</strong><span>🍋</span></button>
+        <button class="snack-item" data-item="playful"><strong>playful</strong><span>🍓</span></button>
+        <button class="snack-item" data-item="expressive"><strong>expressive</strong><span>🫐</span></button>
+      </div>
+
+      <aside class="cart-panel">
+        <div class="cart-title"><span>flavor basket</span><span id="cartCount">0/3</span></div>
+        <div class="cart-basket" id="cartBasket"></div>
+        <button class="enter-site" id="enterSite">enter site</button>
+        <p class="cart-note">checkout opens when your basket is full</p>
+      </aside>
+    </div>
+  </section>
+
+  <div class="marquee">
+    <span>fresh websites daily ✦ add to cart ✦ strategy with extra sauce ✦ browser baby yummy portfolio ✦ fresh websites daily ✦ add to cart ✦ strategy with extra sauce ✦ browser baby yummy portfolio ✦&nbsp;</span>
+  </div>
+
+  <main class="page">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <div class="eyebrow">new template flavor</div>
+        <h1>The Yummy Portfolio</h1>
+        <p class="subtitle">A juicy little website for creatives, strategists, stylists, photographers, food girls, event makers, and anyone whose work deserves better packaging.</p>
+        <div class="hero-buttons">
+          <a class="pill cream" href="#basket">view services</a>
+          <a class="pill pink" href="#work">open snack aisle</a>
+          <a class="pill brown" href="#checkout">checkout</a>
+        </div>
+      </div>
+
+      <aside class="nutrition-card" aria-label="Nutrition Facts inspired portfolio card">
+        <div class="nutrition-title">Nutrition Facts</div>
+        <div class="label-row"><span>Serving Size</span><strong>1 Creative</strong></div>
+        <div class="label-row"><span>Servings Per Website</span><strong>Unlimited</strong></div>
+        <div class="label-row big"><span>Amount Per Serving</span><strong>1 Brand World</strong></div>
+        <div class="daily">% Daily Value*</div>
+        <div class="label-row"><strong>Total Main Character Energy</strong><strong>100%</strong></div>
+        <div class="label-row indent"><span>Strategy</span><strong>25g</strong></div>
+        <div class="label-row indent"><span>Visual Story</span><strong>30g</strong></div>
+        <div class="label-row"><strong>Internet Flavor</strong><strong>1000%</strong></div>
+        <div class="label-row"><strong>Generic Squarespace Vibe</strong><strong>0%</strong></div>
+        <div class="label-row"><strong>Portfolio Drama</strong><strong>50%</strong></div>
+        <div class="label-row indent"><span>Case Studies</span><strong>10g</strong></div>
+        <div class="label-row indent"><span>Press / Resume</span><strong>10g</strong></div>
+        <div class="label-row big"><span>Contains</span><strong>cute links</strong></div>
+        <p class="tiny-note">*Percent Daily Values are based on your personal brand diet. Your sparkle may be higher or lower depending on your heart needs.</p>
+      </aside>
+    </section>
+
+    <!-- ABOUT ME SECTION -->
+    <section class="section" id="about">
+      <h2 class="section-title">Product Label / about me</h2>
+
+      <div class="product-label">
+        <div class="label-header">creative profile</div>
+
+        <p class="label-text">
+          I’m a creative working at the intersection of strategy, storytelling, and internet culture. I build brand worlds that feel intentional, playful, and a little bit unhinged — the kind people actually remember.
+        </p>
+
+        <p class="label-text">
+          My work blends structure and instinct: part system thinker, part taste curator. I care about how things feel just as much as how they function.
+        </p>
+
+        <p class="label-text">
+          If you're looking for something that stands out (and not another beige template), you're in the right place.
+        </p>
+
+        <div class="label-footer">
+          <span>preservatives: none</span>
+          <span>artificial vibes: 0%</span>
+        </div>
+      </div>
+
+      <style>
+        .product-label {
+          max-width: 720px;
+          background: #fff;
+          border: 4px solid #111;
+          padding: 22px;
+          box-shadow: 10px 10px 0 rgba(0,0,0,.3);
+          font-family: "Courier New", monospace;
+        }
+
+        .label-header {
+          text-transform: uppercase;
+          font-weight: 900;
+          font-size: 14px;
+          border-bottom: 3px solid #111;
+          padding-bottom: 8px;
+          margin-bottom: 12px;
+        }
+
+        .label-text {
+          font-weight: 900;
+          font-size: 14px;
+          line-height: 1.4;
+          margin-bottom: 14px;
+        }
+
+        .label-footer {
+          border-top: 3px solid #111;
+          padding-top: 10px;
+          display: flex;
+          justify-content: space-between;
+          font-size: 12px;
+          text-transform: uppercase;
+          font-weight: 900;
+        }
+      </style>
+    </section>
+
+    <section class="section" id="basket">
+      <h2 class="section-title">What’s in my basket of skills?</h2>
+      <div class="basket-grid">
+        <div class="basket-item">website</div>
+        <div class="basket-item">socials</div>
+        <div class="basket-item">content</div>
+        <div class="basket-item">strategy</div>
+        <div class="basket-item">branding</div>
+        <div class="basket-item">emails</div>
+        <div class="basket-item">creative direction</div>
+        <div class="basket-item">paid ads</div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <h2 class="section-title">My yummiest projects</h2>
+      <div class="work-grid">
+        <article class="work-card"><div class="work-top">🍓</div><div class="work-info"><h3>Project One</h3><p>A short juicy description of the project, what you made, and why it worked.</p></div></article>
+        <article class="work-card"><div class="work-top">🍋</div><div class="work-info"><h3>Project Two</h3><p>Use this card for a case study, campaign, portfolio image, or featured service.</p></div></article>
+        <article class="work-card"><div class="work-top">🫐</div><div class="work-info"><h3>Project Three</h3><p>Swap the emoji block for an image when the client sends their photos.</p></div></article>
+      </div>
+    </section>
+
+    <section class="section" id="resume">
+      <h2 class="section-title">Receipt / resume</h2>
+      <div class="receipt">
+        <div class="receipt-line"><strong>ITEM</strong><strong>DETAILS</strong></div>
+        <div class="receipt-line"><span>Experience</span><span>Brand Strategy / Content / Creative Direction</span></div>
+        <div class="receipt-line"><span>Special Sauce</span><span>Storytelling, taste, internet instincts</span></div>
+        <div class="receipt-line"><span>Past Clients</span><span>Client One, Client Two, Client Three</span></div>
+        <div class="receipt-line"><span>Download</span><span><a href="#">resume.pdf</a></span></div>
+        <div class="receipt-line"><strong>TOTAL</strong><strong>hire me already</strong></div>
+      </div>
+    </section>
+
+    <section class="section checkout" id="checkout">
+      <h2 class="section-title">Ready to checkout?</h2>
+      <p class="subtitle" style="margin-left:auto;margin-right:auto;">This is where the contact form, booking link, or email button goes. Make it feel like adding the creative to cart.</p>
+      <a class="pill orange" href="mailto:hello@example.com">add me to cart</a>
+    </section>
+  </main>
+
+  <button id="backToStart" style="position:fixed;bottom:20px;left:20px;z-index:50;border:3px solid #111;background:#fff;padding:10px 14px;font-weight:900;cursor:pointer;box-shadow:4px 4px 0 #111;">back to start</button>
+
+  <footer class="footer">made fresh by Browser Baby ✦ no boring websites allowed</footer>
+
+  <script>
+    const snackItems = document.querySelectorAll('.snack-item');
+    const cartBasket = document.getElementById('cartBasket');
+    const cartCount = document.getElementById('cartCount');
+    const enterSite = document.getElementById('enterSite');
+    const entryScreen = document.getElementById('entryScreen');
+    const body = document.body;
+    const addedItems = [];
+    const requiredItems = 3;
+
+    snackItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        if (addedItems.length >= requiredItems || item.classList.contains('added')) return;
+
+        const itemName = item.dataset.item;
+        addedItems.push(itemName);
+        item.classList.add('added');
+
+        const chip = document.createElement('div');
+        chip.className = 'cart-chip';
+        chip.textContent = itemName;
+        cartBasket.appendChild(chip);
+
+        cartCount.textContent = `${addedItems.length}/${requiredItems}`;
+
+        if (addedItems.length === requiredItems) {
+          enterSite.classList.add('ready');
+          enterSite.textContent = 'checkout complete — enter site';
+        }
+      });
+    });
+
+    enterSite.addEventListener('click', () => {
+      if (addedItems.length < requiredItems) return;
+      entryScreen.classList.add('hidden');
+      body.classList.remove('locked');
+    });
+
+    const backBtn = document.getElementById('backToStart');
+    backBtn.addEventListener('click', () => {
+      entryScreen.classList.remove('hidden');
+      body.classList.add('locked');
+    });
+  </script>
+</body>
+</html>
