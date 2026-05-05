@@ -636,6 +636,62 @@
     margin-top: 8px;
     line-height: 1.7;
   }
+  /* MOBILE FIXES */
+@media (max-width: 768px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .win-content {
+    padding: 16px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .templates-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .template-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .template-preview {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .section-title,
+  .section-sub {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    text-align: center;
+  }
+
+  .nav-btn {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  img,
+  video,
+  iframe {
+    max-width: 100%;
+    height: auto;
+  }
+}
 </style>
 
 <div class="scanline"></div>
