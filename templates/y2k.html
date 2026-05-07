@@ -141,7 +141,15 @@
   z-index: 2;
   margin-top: 18px;
 }
-
+.headline em {
+  text-transform: lowercase;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.08em;
+  letter-spacing: -.03em;
+  display: inline-block;
+}
 .ibook-wrap {
   position: relative;
   left: auto;
@@ -599,10 +607,10 @@
 
     <main class="landing" id="landing">
       <section class="landing-card">
-        <div class="script-logo">Browser Baby portfolio</div>
+        <div class="script-logo">Julia's portfolio</div>
 
         <h1 class="headline">
-          Hi! I’m a <em>creative internet girl</em><br />
+          Hi! I’m a <em>creative technologist</em><br />
           with a portfolio worth clicking
         </h1>
 
@@ -667,19 +675,19 @@
     const pages = {
       about: {
         title: 'about me',
-        html: `<h2>About Me</h2><p>This is where the client’s story goes. Keep it personal, editorial, and charming — less LinkedIn bio, more internet diary meets professional proof.</p>`
+        html: `<h2>About Me</h2><p>This is where the your story goes. Keep it personal, editorial, and charming. Write something that will make recruiters go, Yes!</p>`
       },
       work: {
         title: 'my work',
-        html: `<h2>My Work</h2><p>Add 3–6 featured projects here. Each one can open into its own case study, gallery, or mini scrapbook page.</p>`
+        html: `<h2>My Work</h2><p>Add 2-4 featured projects here. Each one can open into its own case study or mini gallery.</p>`
       },
       resume: {
         title: 'resume',
         html: `<h2>Resume</h2><p>Add a short resume summary here: role, experience, strongest skills, and what kind of work they are looking for.</p><a class="download-btn" href="files/resume.pdf" target="_blank" rel="noopener">download resume.pdf</a>`
       },
       contact: {
-        title: 'contact me baby',
-        html: `<h2>Contact</h2><p>Email, Instagram, booking links, newsletter, or a tiny form can live here. Make it feel like sending a note through cyberspace.</p>`
+        title: 'contact me',
+        html: `<h2>Contact</h2><p>Email, Instagram, booking links, Substack/Linkedin links can live here. Make it feel like sending a note through cyberspace.</p>`
       }
     };
 
