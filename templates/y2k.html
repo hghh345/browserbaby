@@ -514,12 +514,27 @@
     width: 100%;
     line-height: .95;
   }
-
-  .script-logo::after {
-    right: 4px;
-    top: -10px;
-    font-size: 20px;
+.script-logo::after {
+  content: "✦";
+  position: absolute;
+  right: -34px;
+  top: 6px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 30px;
+  color: #ff8fd1;
+  animation: sparkleBlink 1.4s ease-in-out infinite;
   }
+  
+  .script-logo::before {
+  content: "✦";
+  position: absolute;
+  left: -34px;
+  top: 18px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 22px;
+  color: #fff2a8;
+  animation: sparkleBlink 1.7s ease-in-out infinite;
+}
 
   .headline {
     width: 96%;
