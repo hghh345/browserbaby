@@ -328,7 +328,6 @@
   .marquee-bar {
     font-size: 15px;
   }
-}
   }
 </style>
 </head>
@@ -625,9 +624,17 @@
         <label class="form-label">ANYTHING ELSE?</label>
         <textarea class="form-textarea" placeholder="anything we should know before we start" id="f_notes" style="min-height:60px;"></textarea>
       </div>
-
-<button class="submit-btn" onclick="window.location.href='https://buy.stripe.com/cNi28q6QAe6dgn24gU5gc0a'">
-  SUBMIT + PAY →
+<div class="form-row">
+  <label style="font-family:'Space Mono',monospace;font-size:9px;color:#333;line-height:1.7;display:block;">
+    <input type="checkbox" id="f_rules" style="margin-right:6px;">
+    I have read and agree to the
+    <a href="system-rules.html" target="_blank" style="color:#000080;text-decoration:underline;">
+      SYSTEM RULES.EXE
+    </a>
+  </label>
+</div>
+<button class="submit-btn" onclick="submitForm()">
+  SUBMIT + PAY $999 →
 </button>
     <div class="form-note">
   * by submitting you confirm your domain is purchased, your assets are ready, and you've read the <a href="system-rules.html" target="_blank">SYSTEM RULES.EXE</a>. payment is required before work begins. one round of edits. no calls. future edits + updates are paid separately.
@@ -661,25 +668,35 @@ function goTo(n) {
 document.getElementById('clickComputer').addEventListener('click', () => goTo(2));
 
 function submitForm() {
-  const required = ['f_name','f_email','f_domain','f_template','f_role'];
-  for(let id of required) {
-    if(!document.getElementById(id).value.trim()) {
+  const required = [
+    'f_name',
+    'f_email',
+    'f_domain',
+    'f_template',
+    'f_role'
+  ];
+
+  for (let id of required) {
+    const field = document.getElementById(id);
+    if (!field || !field.value.trim()) {
       alert('please fill in all required fields *');
       return;
     }
   }
+
+  const rules = document.getElementById('f_rules');
+  if (!rules || !rules.checked) {
+    alert('please confirm you read the SYSTEM RULES.EXE');
+    return;
+  }
+
+  window.location.href = 'https://buy.stripe.com/cNi28q6QAe6dgn24gU5gc0a';
+}
+  }
   document.getElementById('formBody').style.display = 'none';
   document.getElementById('successScreen').classList.add('show');
 }
-<div class="form-row">
-  <label style="font-family:'Space Mono',monospace;font-size:9px;color:#333;line-height:1.7;display:block;">
-    <input type="checkbox" id="f_rules" style="margin-right:6px;">
-    I have read and agree to the
-    <a href="system-rules.html" target="_blank" style="color:#000080;text-decoration:underline;">
-      SYSTEM RULES.EXE
-    </a>
-  </label>
-</div>
+
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
