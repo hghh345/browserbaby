@@ -661,11 +661,14 @@
 <script>
 function goTo(n) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('s'+n).classList.add('active');
-  window.scrollTo(0,0);
+  document.getElementById('s' + n).classList.add('active');
+  window.scrollTo(0, 0);
 }
 
-document.getElementById('clickComputer').addEventListener('click', () => goTo(2));
+const clickComputer = document.getElementById('clickComputer');
+if (clickComputer) {
+  clickComputer.addEventListener('click', () => goTo(2));
+}
 
 function submitForm() {
   const required = [
@@ -692,70 +695,84 @@ function submitForm() {
 
   window.location.href = 'https://buy.stripe.com/cNi28q6QAe6dgn24gU5gc0a';
 }
-  }
-  document.getElementById('formBody').style.display = 'none';
-  document.getElementById('successScreen').classList.add('show');
-}
 
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
 
 const starList = [];
-for(let i=0;i<80;i++) {
+for (let i = 0; i < 80; i++) {
   starList.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    r: Math.random()*1.5+0.5,
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.5 + 0.5,
     a: Math.random(),
-    speed: Math.random()*0.02+0.005
+    speed: Math.random() * 0.02 + 0.005
   });
 }
 
 function drawStars() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   starList.forEach(s => {
     s.a += s.speed;
-    const alpha = (Math.sin(s.a)+1)/2;
+    const alpha = (Math.sin(s.a) + 1) / 2;
     ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fillStyle = `rgba(255,255,255,${alpha*0.7})`;
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${alpha * 0.7})`;
     ctx.fill();
   });
+
   requestAnimationFrame(drawStars);
 }
+
 drawStars();
 
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
+window.addEventListener('resize', resizeCanvas);
 
-const lines = ['BROWSER BABY v2.0','loading your remarkable world...','click to begin ✦'];
-let li=0, ci=0, txt='';
-const el=document.getElementById('typedText');
+const lines = [
+  'BROWSER BABY v2.0',
+  'loading your remarkable world...',
+  'click to begin ✦'
+];
 
-function type(){
-  if(li>=lines.length){
-    li=0; txt=''; ci=0;
-    setTimeout(type,2000);
+let li = 0;
+let ci = 0;
+let txt = '';
+const el = document.getElementById('typedText');
+
+function type() {
+  if (!el) return;
+
+  if (li >= lines.length) {
+    li = 0;
+    txt = '';
+    ci = 0;
+    setTimeout(type, 2000);
     return;
   }
-  if(ci<lines[li].length){
+
+  if (ci < lines[li].length) {
     txt += lines[li][ci];
     el.innerHTML = txt + '<span class="cursor"></span>';
     ci++;
-    setTimeout(type,60);
+    setTimeout(type, 60);
   } else {
     setTimeout(() => {
       txt += '\n';
       li++;
-      ci=0;
+      ci = 0;
       type();
-    },800);
+    }, 800);
   }
 }
+
 type();
 </script>
 </body>
