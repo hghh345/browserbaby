@@ -35,7 +35,6 @@
 
   .stars { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; }
 
-  /* SCREEN 1 */
   #s1 { background: #000080; position: relative; overflow: hidden; }
 
   .computer-wrap {
@@ -73,172 +72,38 @@
   .computer-foot { width: 140px; height: 12px; background: #c0c0c0; border: 2px solid #808080; border-radius: 2px; box-shadow: 3px 3px 0 #404040; }
 
   .logo-text { font-family: 'VT323', monospace; font-size: 52px; color: #ffff00; text-shadow: 3px 3px 0 #ff6600, 0 0 20px rgba(255,255,0,0.5); letter-spacing: 2px; text-align: center; position: relative; z-index: 2; margin-bottom: 8px; }
-  .tagline { font-family: 'VT323', monospace; font-size: 18px; color: #00ffff; text-align: center; letter-spacing: 1px; margin-bottom: 24px; text-shadow: 0 0 8px #00ffff; position: relative; z-index: 2; }
+  .tagline { font-family: 'VT323', monospace; font-size: 18px; color: #00ffff; text-align: center; letter-spacing: 1px; margin-bottom: 14px; text-shadow: 0 0 8px #00ffff; position: relative; z-index: 2; }
+  .clarity-line { font-family: 'Space Mono', monospace; font-size: 10px; color: #fff; max-width: 540px; text-align: center; line-height: 1.7; margin-bottom: 24px; position: relative; z-index: 2; }
   .click-hint { font-family: 'VT323', monospace; font-size: 20px; color: #ff69b4; animation: blink 1.2s infinite; margin-top: 20px; letter-spacing: 2px; text-shadow: 0 0 8px #ff69b4; position: relative; z-index: 2; }
 
-  /* SCREEN 2 - ABOUT */
   #s2 { background: #ff1493; padding: 40px 20px 80px; justify-content: flex-start; min-height: 100vh; }
 
-  .about-wrap {
-    width: 100%; max-width: 620px; margin: 0 auto;
-    animation: popIn 0.5s ease forwards;
-  }
+  .about-wrap { width: 100%; max-width: 620px; margin: 0 auto; animation: popIn 0.5s ease forwards; }
+  .about-window { background: #000; border: 3px solid #ff69b4; box-shadow: 8px 8px 0 #800040; overflow: hidden; }
+  .about-titlebar { background: #ff1493; padding: 6px 12px; font-family: 'VT323', monospace; font-size: 18px; color: #ffff00; letter-spacing: 2px; display: flex; justify-content: space-between; align-items: center; }
+  .about-body { display: grid; grid-template-columns: 200px 1fr; gap: 0; }
+  .about-img-col { background: #1a0010; border-right: 2px solid #ff1493; display: flex; flex-direction: column; align-items: center; padding: 20px 12px; gap: 12px; }
+  .about-img { width: 160px; height: 160px; object-fit: cover; border: 3px solid #ff69b4; box-shadow: 4px 4px 0 #ff1493; image-rendering: auto; }
+  .about-name { font-family: 'VT323', monospace; font-size: 28px; color: #ffff00; text-align: center; text-shadow: 2px 2px 0 #ff6600; letter-spacing: 1px; }
+  .about-roles { display: flex; flex-direction: column; gap: 4px; width: 100%; }
+  .role-tag { font-family: 'VT323', monospace; font-size: 13px; color: #000; background: #ff69b4; padding: 2px 6px; text-align: center; letter-spacing: 1px; }
+  .about-text-col { padding: 24px 20px; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+  .about-headline { font-family: 'VT323', monospace; font-size: 32px; color: #ff69b4; line-height: 1.2; text-shadow: 0 0 10px rgba(255,105,180,0.4); }
+  .about-body-text { font-family: 'Space Mono', monospace; font-size: 10px; color: #ccc; line-height: 1.8; }
+  .about-mission { font-family: 'VT323', monospace; font-size: 20px; color: #ffff00; line-height: 1.4; border-left: 3px solid #ff1493; padding-left: 12px; text-shadow: 1px 1px 0 #ff6600; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+  .stat-box { background: #1a0010; border: 1px solid #ff1493; padding: 8px; text-align: center; }
+  .stat-num { font-family: 'VT323', monospace; font-size: 28px; color: #ff69b4; display: block; text-shadow: 0 0 8px #ff1493; }
+  .stat-label { font-family: 'Space Mono', monospace; font-size: 8px; color: #888; display: block; margin-top: 2px; letter-spacing: 1px; }
 
-  .about-window {
-    background: #000;
-    border: 3px solid #ff69b4;
-    box-shadow: 8px 8px 0 #800040;
-    overflow: hidden;
-  }
-
-  .about-titlebar {
-    background: #ff1493;
-    padding: 6px 12px;
-    font-family: 'VT323', monospace;
-    font-size: 18px;
-    color: #ffff00;
-    letter-spacing: 2px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .about-body {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 0;
-  }
-
-  .about-img-col {
-    background: #1a0010;
-    border-right: 2px solid #ff1493;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 12px;
-    gap: 12px;
-  }
-
-  .about-img {
-    width: 160px;
-    height: 160px;
-    object-fit: cover;
-    border: 3px solid #ff69b4;
-    box-shadow: 4px 4px 0 #ff1493;
-    image-rendering: auto;
-  }
-
-  .about-name {
-    font-family: 'VT323', monospace;
-    font-size: 28px;
-    color: #ffff00;
-    text-align: center;
-    text-shadow: 2px 2px 0 #ff6600;
-    letter-spacing: 1px;
-  }
-
-  .about-roles {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    width: 100%;
-  }
-
-  .role-tag {
-    font-family: 'VT323', monospace;
-    font-size: 13px;
-    color: #000;
-    background: #ff69b4;
-    padding: 2px 6px;
-    text-align: center;
-    letter-spacing: 1px;
-  }
-
-  .about-text-col {
-    padding: 24px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 16px;
-  }
-
-  .about-headline {
-    font-family: 'VT323', monospace;
-    font-size: 32px;
-    color: #ff69b4;
-    line-height: 1.2;
-    text-shadow: 0 0 10px rgba(255,105,180,0.4);
-  }
-
-  .about-body-text {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: #ccc;
-    line-height: 1.8;
-  }
-
-  .about-mission {
-    font-family: 'VT323', monospace;
-    font-size: 20px;
-    color: #ffff00;
-    line-height: 1.4;
-    border-left: 3px solid #ff1493;
-    padding-left: 12px;
-    text-shadow: 1px 1px 0 #ff6600;
-  }
-
-  .about-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-top: 4px;
-  }
-
-  .stat-box {
-    background: #1a0010;
-    border: 1px solid #ff1493;
-    padding: 8px;
-    text-align: center;
-  }
-
-  .stat-num {
-    font-family: 'VT323', monospace;
-    font-size: 28px;
-    color: #ff69b4;
-    display: block;
-    text-shadow: 0 0 8px #ff1493;
-  }
-
-  .stat-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 8px;
-    color: #888;
-    display: block;
-    margin-top: 2px;
-    letter-spacing: 1px;
-  }
-
-  .nav-btn {
-    display: block; width: 100%;
-    background: #ffff00; color: #000080;
-    font-family: 'VT323', monospace; font-size: 22px;
-    padding: 10px; border: none; cursor: pointer;
-    letter-spacing: 2px; border: 3px solid #ff6600;
-    transition: all 0.1s; margin-top: 16px;
-  }
+  .nav-btn { display: block; width: 100%; background: #ffff00; color: #000080; font-family: 'VT323', monospace; font-size: 22px; padding: 10px; border: none; cursor: pointer; letter-spacing: 2px; border: 3px solid #ff6600; transition: all 0.1s; margin-top: 16px; }
   .nav-btn:hover { background: #ffe000; transform: translate(-2px,-2px); box-shadow: 4px 4px 0 #000; }
   .nav-btn:active { transform: translate(0,0); box-shadow: none; }
 
-  .back-btn {
-    font-family: 'VT323', monospace; font-size: 16px;
-    background: none; border: none; cursor: pointer;
-    text-decoration: underline; margin-bottom: 12px; display: block;
-  }
-
+  .back-btn { font-family: 'VT323', monospace; font-size: 16px; background: none; border: none; cursor: pointer; text-decoration: underline; margin-bottom: 12px; display: block; }
   .progress-bar { display: flex; gap: 6px; margin-bottom: 20px; justify-content: center; }
   .progress-dot { width: 10px; height: 10px; border-radius: 50%; transition: all 0.3s; }
 
-  /* SCREEN 3 - TEMPLATES */
   #s3 { background: #ff69b4; padding: 40px 20px 80px; justify-content: flex-start; }
 
   .win-window { background: #c0c0c0; border: 2px solid; border-color: #ffffff #808080 #808080 #ffffff; box-shadow: 2px 2px 0 #000; width: 100%; max-width: 700px; margin: 0 auto; }
@@ -247,30 +112,36 @@
   .win-content { padding: 20px; }
   .section-title { font-family: 'VT323', monospace; font-size: 36px; color: #000080; text-align: center; margin-bottom: 4px; }
   .section-sub { font-family: 'Space Mono', monospace; font-size: 11px; color: #333; text-align: center; margin-bottom: 24px; }
-
   .templates-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
-
   .template-card { border: 2px solid #000; cursor: pointer; transition: transform 0.1s; background: white; }
   .template-card:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 #000; }
   .template-card:active { transform: translate(0,0); box-shadow: none; }
-
   .template-preview { height: 120px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
-
   .t-y2k { background: #000; background-image: repeating-linear-gradient(45deg, #111 0px, #111 10px, #000 10px, #000 20px); }
   .t-y2k-inner { font-family: 'VT323', monospace; font-size: 13px; color: #ff00ff; text-align: center; text-shadow: 0 0 8px #ff00ff, 2px 2px 0 #ff6600; line-height: 1.4; padding: 8px; }
-
   .t-chic { background: #fffde7; }
   .t-chic-inner { font-family: 'VT323', monospace; font-size: 14px; color: #000; text-align: center; line-height: 1.6; padding: 8px; letter-spacing: 2px; }
-
   .t-fruit { background: #e8f5e9; }
   .t-fruit-inner { font-family: 'VT323', monospace; font-size: 13px; color: #1b5e20; text-align: center; line-height: 1.5; padding: 8px; }
-
   .template-label { padding: 8px 10px; border-top: 2px solid #000; background: #fff; }
   .template-name { font-family: 'VT323', monospace; font-size: 20px; color: #000; display: block; }
   .template-desc { font-family: 'Space Mono', monospace; font-size: 9px; color: #555; display: block; line-height: 1.5; margin-top: 2px; }
 
-  /* SCREEN 4 - PRICING */
-  #s4 { background: #00ff41; padding: 40px 20px 80px; justify-content: flex-start; }
+  #s4 { background: #000; padding: 40px 20px 80px; justify-content: flex-start; }
+
+  .compat-box { background: #c0c0c0; border: 3px solid; border-color: #ffffff #808080 #808080 #ffffff; box-shadow: 6px 6px 0 #000080; width: 100%; max-width: 650px; margin: 0 auto; }
+  .compat-content { padding: 22px; }
+  .compat-title { font-family: 'VT323', monospace; font-size: 38px; color: #000080; text-align: center; margin-bottom: 6px; }
+  .compat-sub { font-family: 'Space Mono', monospace; font-size: 10px; color: #333; text-align: center; margin-bottom: 20px; }
+  .compat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .compat-card { background: #fff; border: 2px solid #000; padding: 14px; }
+  .compat-card h3 { font-family: 'VT323', monospace; font-size: 24px; margin-bottom: 10px; }
+  .compat-card.good h3 { color: #008000; }
+  .compat-card.bad h3 { color: #cc0000; }
+  .compat-card p { font-family: 'Space Mono', monospace; font-size: 10px; line-height: 1.7; margin-bottom: 8px; }
+  .compat-note { margin-top: 16px; background: #000080; color: #ffff00; font-family: 'VT323', monospace; font-size: 20px; line-height: 1.4; padding: 14px; text-align: center; }
+
+  #s5 { background: #00ff41; padding: 40px 20px 80px; justify-content: flex-start; }
 
   .price-box { background: #000; color: #00ff41; font-family: 'VT323', monospace; border: 3px solid #00ff41; padding: 24px; width: 100%; max-width: 600px; margin: 0 auto; box-shadow: 6px 6px 0 #004400; }
   .price-title { font-size: 48px; text-shadow: 0 0 12px #00ff41; text-align: center; border-bottom: 1px solid #00ff41; padding-bottom: 12px; margin-bottom: 20px; }
@@ -279,35 +150,31 @@
   .price-label { font-size: 22px; line-height: 1.3; flex: 1; }
   .price-label small { font-size: 14px; color: #00aa30; display: block; line-height: 1.4; margin-top: 4px; }
   .price-amount { font-size: 28px; text-shadow: 0 0 8px #00ff41; white-space: nowrap; }
-
   .beta-badge { background: #00ff41; color: #000; font-family: 'VT323', monospace; font-size: 20px; padding: 6px 16px; text-align: center; margin-bottom: 16px; letter-spacing: 2px; }
-
   .price-total { background: #00ff41; color: #000; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
   .price-total span { font-size: 22px; }
   .price-total strong { font-size: 32px; }
-
+  .how-box { background: #001100; border: 1px solid #004400; padding: 16px; margin-top: 16px; font-family: 'VT323', monospace; color: #00ff41; }
+  .how-title { font-size: 24px; margin-bottom: 10px; text-align: center; text-shadow: 0 0 8px #00ff41; }
+  .how-step { font-size: 17px; line-height: 1.7; color: #00cc30; }
+  .how-step::before { content: "> "; color: #00ff41; }
   .rules-box { background: #001100; border: 1px solid #004400; padding: 16px; margin-top: 16px; font-size: 16px; line-height: 1.8; color: #00cc30; }
   .rules-box .rule::before { content: "> "; color: #00ff41; }
 
-  /* SCREEN 5 - FORM */
-  #s5 { background: #ffff00; padding: 40px 20px 80px; justify-content: flex-start; }
+  #s6 { background: #ffff00; padding: 40px 20px 80px; justify-content: flex-start; }
 
   .form-window { background: #c0c0c0; border: 3px solid; border-color: #ffffff #808080 #808080 #ffffff; box-shadow: 4px 4px 0 #000; width: 100%; max-width: 600px; margin: 0 auto; }
   .form-title-bar { background: #000080; color: #fff; font-family: 'VT323', monospace; font-size: 18px; padding: 4px 8px; display: flex; justify-content: space-between; }
   .form-body { padding: 24px; }
   .form-row { margin-bottom: 16px; }
   .form-label { display: block; font-family: 'VT323', monospace; font-size: 18px; color: #000080; margin-bottom: 4px; }
-  .form-input { width: 100%; background: #fff; border: 2px solid; border-color: #808080 #ffffff #ffffff #808080; font-family: 'Space Mono', monospace; font-size: 11px; padding: 6px 8px; color: #000; outline: none; }
+  .form-input, .form-select, .form-textarea { width: 100%; background: #fff; border: 2px solid; border-color: #808080 #ffffff #ffffff #808080; font-family: 'Space Mono', monospace; font-size: 11px; padding: 6px 8px; color: #000; outline: none; }
   .form-input:focus { border-color: #000080; }
-  .form-select { width: 100%; background: #fff; border: 2px solid; border-color: #808080 #ffffff #ffffff #808080; font-family: 'Space Mono', monospace; font-size: 11px; padding: 6px 8px; color: #000; }
-  .form-textarea { width: 100%; background: #fff; border: 2px solid; border-color: #808080 #ffffff #ffffff #808080; font-family: 'Space Mono', monospace; font-size: 11px; padding: 6px 8px; color: #000; resize: vertical; min-height: 80px; }
-
+  .form-textarea { resize: vertical; min-height: 80px; }
   .submit-btn { width: 100%; background: #000080; color: #ffff00; font-family: 'VT323', monospace; font-size: 24px; padding: 10px; border: 3px solid; border-color: #4040ff #000040 #000040 #4040ff; cursor: pointer; letter-spacing: 2px; margin-top: 8px; transition: all 0.1s; }
   .submit-btn:hover { background: #0000aa; }
   .submit-btn:active { transform: translate(2px,2px); border-color: #000040 #4040ff #4040ff #000040; }
-
   .form-note { font-family: 'Space Mono', monospace; font-size: 9px; color: #555; margin-top: 12px; line-height: 1.6; border-top: 1px dashed #aaa; padding-top: 12px; }
-
   .success-screen { display: none; text-align: center; padding: 40px 20px; }
   .success-screen.show { display: block; }
   .success-icon { font-family: 'VT323', monospace; font-size: 80px; color: #000080; display: block; animation: float 2s ease-in-out infinite; }
@@ -316,22 +183,35 @@
 
   .marquee-bar { width: 100%; background: #ffff00; color: #000080; font-family: 'VT323', monospace; font-size: 18px; overflow: hidden; padding: 4px 0; position: fixed; bottom: 0; white-space: nowrap; z-index: 10; }
   .marquee-inner { display: inline-block; animation: marquee 18s linear infinite; padding-left: 100%; }
-</style>
 
+  @media (max-width: 640px) {
+    .about-body, .templates-grid, .compat-grid { grid-template-columns: 1fr; }
+    .about-img-col { border-right: none; border-bottom: 2px solid #ff1493; }
+    .price-item { flex-direction: column; }
+  }
+</style>
+</head>
+
+<body>
 <div class="scanline"></div>
 <canvas class="stars" id="stars"></canvas>
 
-<!-- S1: LANDING -->
 <div class="screen active" id="s1">
   <div class="logo-text">BROWSER BABY</div>
   <div class="tagline">✦ interactive portfolio worlds for the remarkable ✦</div>
-  <div class="progress-bar">
-    <div class="progress-dot" style="background:#ffff00;border:2px solid #ffff00;box-shadow:0 0 6px #ffff00;width:10px;height:10px;border-radius:50%;"></div>
-    <div class="progress-dot" style="background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.5);width:10px;height:10px;border-radius:50%;"></div>
-    <div class="progress-dot" style="background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.5);width:10px;height:10px;border-radius:50%;"></div>
-    <div class="progress-dot" style="background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.5);width:10px;height:10px;border-radius:50%;"></div>
-    <div class="progress-dot" style="background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.5);width:10px;height:10px;border-radius:50%;"></div>
+  <div class="clarity-line">
+    Browser Baby creates interactive one-page portfolio worlds for creatives using pre-built concepts adapted to your work, aesthetic, and personality.
   </div>
+
+  <div class="progress-bar">
+    <div class="progress-dot" style="background:#ffff00;border:2px solid #ffff00;box-shadow:0 0 6px #ffff00;"></div>
+    <div class="progress-dot" style="background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.5);"></div>
+    <div class="progress-dot" style="background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.5);"></div>
+    <div class="progress-dot" style="background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.5);"></div>
+    <div class="progress-dot" style="background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.5);"></div>
+    <div class="progress-dot" style="background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.5);"></div>
+  </div>
+
   <div class="computer-wrap" id="clickComputer">
     <div class="monitor">
       <div class="screen-inner">
@@ -344,28 +224,19 @@
     <div class="computer-stand"></div>
     <div class="computer-foot"></div>
   </div>
+
   <div class="click-hint">[ CLICK THE COMPUTER ]</div>
 </div>
 
-<!-- S2: ABOUT -->
-<div class="screen" id="s2" style="background:#ff1493;">
-  <div class="about-wrap" style="width:100%;max-width:620px;margin:0 auto;">
+<div class="screen" id="s2">
+  <div class="about-wrap">
     <button class="back-btn" style="color:#ffff00;" onclick="goTo(1)">← back</button>
-    <div class="progress-bar">
-      <div class="progress-dot" style="background:#ffff00;border:2px solid #ffff00;width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:#ffff00;border:2px solid #ffff00;box-shadow:0 0 6px #ffff00;width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.5);width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.5);width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.5);width:10px;height:10px;border-radius:50%;"></div>
-    </div>
 
     <div class="about-window">
       <div class="about-titlebar">
         <span>MEET_THE_MAKER.EXE</span>
         <div style="display:flex;gap:3px;">
-          <div class="win-btn" style="background:#c0c0c0;border:1px solid;border-color:#fff #808080 #808080 #fff;width:16px;height:16px;font-size:10px;display:flex;align-items:center;justify-content:center;color:#000;">_</div>
-          <div class="win-btn" style="background:#c0c0c0;border:1px solid;border-color:#fff #808080 #808080 #fff;width:16px;height:16px;font-size:10px;display:flex;align-items:center;justify-content:center;color:#000;">□</div>
-          <div class="win-btn" style="background:#c0c0c0;border:1px solid;border-color:#fff #808080 #808080 #fff;width:16px;height:16px;font-size:10px;display:flex;align-items:center;justify-content:center;color:red;">✕</div>
+          <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn" style="color:red;">✕</div>
         </div>
       </div>
 
@@ -409,17 +280,9 @@
   </div>
 </div>
 
-<!-- S3: TEMPLATES -->
-<div class="screen" id="s3" style="background:#ff69b4;">
+<div class="screen" id="s3">
   <div style="width:100%;max-width:700px;margin:0 auto;">
     <button class="back-btn" style="color:#000080;" onclick="goTo(2)">← back</button>
-    <div class="progress-bar">
-      <div class="progress-dot" style="background:#000080;border:2px solid #000080;width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:#000080;border:2px solid #000080;width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:#000080;border:2px solid #000080;box-shadow:0 0 6px #000080;width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:rgba(0,0,128,0.3);border:2px solid rgba(0,0,128,0.4);width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:rgba(0,0,128,0.3);border:2px solid rgba(0,0,128,0.4);width:10px;height:10px;border-radius:50%;"></div>
-    </div>
   </div>
 
   <div class="win-window">
@@ -429,9 +292,11 @@
         <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn" style="color:red;">✕</div>
       </div>
     </div>
+
     <div class="win-content">
       <div class="section-title">PICK YOUR WORLD</div>
       <div class="section-sub">three interactive experiences. one is yours.</div>
+
       <div class="templates-grid">
         <div class="template-card" onclick="goTo(4)">
           <div class="template-preview t-y2k">
@@ -446,6 +311,7 @@
             <span class="template-desc">a pink laptop opens into your mac desktop. work lives in folders.</span>
           </div>
         </div>
+
         <div class="template-card" onclick="goTo(4)">
           <div class="template-preview t-chic">
             <div class="t-chic-inner" style="font-size:12px;letter-spacing:1px;">
@@ -458,6 +324,7 @@
             <span class="template-desc">visitors find your words hidden in a grid to unlock your site.</span>
           </div>
         </div>
+
         <div class="template-card" onclick="goTo(4)">
           <div class="template-preview t-fruit">
             <div class="t-fruit-inner">
@@ -472,33 +339,76 @@
           </div>
         </div>
       </div>
-      <button class="nav-btn" onclick="goTo(4)">SEE WHAT IT COSTS →</button>
+
+      <button class="nav-btn" onclick="goTo(4)">IS THIS FOR YOU? →</button>
     </div>
   </div>
 </div>
 
-<!-- S4: PRICING -->
-<div class="screen" id="s4" style="background:#00ff41;">
-  <div style="width:100%;max-width:600px;margin:0 auto;">
-    <button class="back-btn" style="color:#004400;" onclick="goTo(3)">← back</button>
-    <div class="progress-bar">
-      <div class="progress-dot" style="background:#004400;border:2px solid #004400;width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:#004400;border:2px solid #004400;width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:#004400;border:2px solid #004400;width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:#004400;border:2px solid #004400;box-shadow:0 0 6px #004400;width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:rgba(0,68,0,0.3);border:2px solid rgba(0,68,0,0.4);width:10px;height:10px;border-radius:50%;"></div>
+<div class="screen" id="s4">
+  <div style="width:100%;max-width:650px;margin:0 auto;">
+    <button class="back-btn" style="color:#ffff00;" onclick="goTo(3)">← back</button>
+  </div>
+
+  <div class="compat-box">
+    <div class="win-titlebar">
+      <span>system_compatibility_check.exe</span>
+      <div style="display:flex;gap:3px;">
+        <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn" style="color:red;">✕</div>
+      </div>
+    </div>
+
+    <div class="compat-content">
+      <div class="compat-title">WHO THIS IS FOR</div>
+      <div class="compat-sub">browser baby is not for everyone. that is the point.</div>
+
+      <div class="compat-grid">
+        <div class="compat-card good">
+          <h3>YES.EXE</h3>
+          <p>✦ creatives who want personality online</p>
+          <p>✦ designers, artists, stylists, musicians, internet people</p>
+          <p>✦ portfolios that should feel memorable, playful, and intentional</p>
+          <p>✦ people who want a digital world — not a corporate website</p>
+          <p>✦ people who can send their content upfront</p>
+        </div>
+
+        <div class="compat-card bad">
+          <h3>NOPE.EXE</h3>
+          <p>✕ portfolios that need constant updates</p>
+          <p>✕ traditional corporate websites</p>
+          <p>✕ large multi-page platforms</p>
+          <p>✕ fully custom agency-style projects</p>
+          <p>✕ people looking for ongoing website management</p>
+        </div>
+      </div>
+
+      <div class="compat-note">
+        Browser Baby worlds are finished, focused internet experiences.<br>
+        Future edits, swaps, or updates can be booked separately.
+      </div>
+
+      <button class="nav-btn" onclick="goTo(5)">SEE WHAT IT COSTS →</button>
     </div>
   </div>
+</div>
+
+<div class="screen" id="s5">
+  <div style="width:100%;max-width:600px;margin:0 auto;">
+    <button class="back-btn" style="color:#004400;" onclick="goTo(4)">← back</button>
+  </div>
+
   <div class="price-box">
     <div class="price-title">THE OFFER</div>
     <div class="beta-badge">✦ BETA FOUNDER RATE — 3 SPOTS ONLY ✦</div>
+
     <div class="price-item">
       <div class="price-label">
         YOUR WORLD
-        <small>one interactive portfolio experience built custom for you on GitHub Pages. you pick the world, we build it around you.</small>
+        <small>one interactive portfolio experience adapted to your work, aesthetic, and personality. you pick the world, we build it around you.</small>
       </div>
       <div class="price-amount">$777</div>
     </div>
+
     <div class="price-item">
       <div class="price-label">
         + THE STORY
@@ -506,10 +416,21 @@
       </div>
       <div class="price-amount">+$300</div>
     </div>
+
     <div class="price-total">
       <span>WORLD + STORY</span>
       <strong>$1,077</strong>
     </div>
+
+    <div class="how-box">
+      <div class="how-title">HOW IT WORKS</div>
+      <div class="how-step">choose your world</div>
+      <div class="how-step">submit your content + payment</div>
+      <div class="how-step">we build your experience</div>
+      <div class="how-step">you receive your site in 2–3 weeks</div>
+      <div class="how-step">launch into the internet ✦</div>
+    </div>
+
     <div class="rules-box">
       <div class="rule">no calls. ever.</div>
       <div class="rule">fill out the form. we build your world.</div>
@@ -517,41 +438,40 @@
       <div class="rule">one round of edits. that's it.</div>
       <div class="rule">you buy your domain. we connect it.</div>
       <div class="rule">assets + copy must be ready upfront.</div>
-      <div class="rule">no monthly fees. github pages is free.</div>
+      <div class="rule">no monthly hosting fees.</div>
+      <div class="rule">future edits + updates are paid separately.</div>
     </div>
-    <button class="nav-btn" style="background:#00ff41;color:#000;border-color:#00aa00;margin-top:16px;" onclick="goTo(5)">I'M REMARKABLE. LET'S GO →</button>
+
+    <button class="nav-btn" style="background:#00ff41;color:#000;border-color:#00aa00;margin-top:16px;" onclick="goTo(6)">I'M REMARKABLE. LET'S GO →</button>
   </div>
 </div>
 
-<!-- S5: FORM -->
-<div class="screen" id="s5" style="background:#ffff00;">
+<div class="screen" id="s6">
   <div style="width:100%;max-width:600px;margin:0 auto;">
-    <button class="back-btn" style="color:#000080;" onclick="goTo(4)">← back</button>
-    <div class="progress-bar">
-      <div class="progress-dot" style="background:#cc8800;border:2px solid #cc8800;width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:#cc8800;border:2px solid #cc8800;width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:#cc8800;border:2px solid #cc8800;width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:#cc8800;border:2px solid #cc8800;width:10px;height:10px;border-radius:50%;"></div>
-      <div class="progress-dot" style="background:#cc8800;border:2px solid #cc8800;box-shadow:0 0 6px #cc8800;width:10px;height:10px;border-radius:50%;"></div>
-    </div>
+    <button class="back-btn" style="color:#000080;" onclick="goTo(5)">← back</button>
   </div>
+
   <div class="form-window">
     <div class="form-title-bar">
       <span>new_order_form.exe — Browser Baby</span><span>■</span>
     </div>
+
     <div class="form-body" id="formBody">
       <div class="form-row">
         <label class="form-label">YOUR NAME *</label>
         <input class="form-input" type="text" placeholder="first + last" id="f_name">
       </div>
+
       <div class="form-row">
         <label class="form-label">EMAIL *</label>
         <input class="form-input" type="email" placeholder="you@yourdomain.com" id="f_email">
       </div>
+
       <div class="form-row">
         <label class="form-label">YOUR DOMAIN *</label>
         <input class="form-input" type="text" placeholder="janedoe.com (must be purchased already)" id="f_domain">
       </div>
+
       <div class="form-row">
         <label class="form-label">YOUR WORLD *</label>
         <select class="form-select" id="f_template">
@@ -561,6 +481,7 @@
           <option value="Fruit">The Fruit — draw a fruit to unlock</option>
         </select>
       </div>
+
       <div class="form-row">
         <label class="form-label">PACKAGE *</label>
         <select class="form-select" id="f_package">
@@ -569,25 +490,38 @@
           <option value="world+story">Your World + The Story — $1,077</option>
         </select>
       </div>
+
       <div class="form-row">
         <label class="form-label">WHAT DO YOU DO? *</label>
         <input class="form-input" type="text" placeholder="e.g. brand designer, motion designer, art director" id="f_role">
       </div>
+
       <div class="form-row">
         <label class="form-label">YOUR VIBE REFERENCES</label>
         <textarea class="form-textarea" placeholder="links, artists, brands, aesthetics that inspire you" id="f_refs"></textarea>
       </div>
+
       <div class="form-row">
         <label class="form-label">ANYTHING ELSE?</label>
         <textarea class="form-textarea" placeholder="anything we should know before we start" id="f_notes" style="min-height:60px;"></textarea>
       </div>
+
       <button class="submit-btn" onclick="submitForm()">SUBMIT + PAY →</button>
-      <div class="form-note">* by submitting you confirm your domain is purchased, your assets are ready, and you've read the rules. payment link sent within 24hrs. project kicks off once payment clears. one round of edits. no calls.</div>
+
+      <div class="form-note">
+        * by submitting you confirm your domain is purchased, your assets are ready, and you've read the rules. payment link sent within 24hrs. project kicks off once payment clears. one round of edits. no calls. future edits + updates are paid separately.
+      </div>
     </div>
+
     <div class="success-screen" id="successScreen">
       <span class="success-icon">✦</span>
       <div class="success-msg">YOU'RE IN, BABY.</div>
-      <div class="success-sub">we got your order.<br>payment link incoming within 24 hours.<br>your world is about to be born.<br><br><strong style="font-family:'VT323',monospace;font-size:18px;color:#000080;">browser baby™</strong></div>
+      <div class="success-sub">
+        we got your order.<br>
+        payment link incoming within 24 hours.<br>
+        your world is about to be born.<br><br>
+        <strong style="font-family:'VT323',monospace;font-size:18px;color:#000080;">browser baby™</strong>
+      </div>
     </div>
   </div>
 </div>
@@ -608,7 +542,10 @@ document.getElementById('clickComputer').addEventListener('click', () => goTo(2)
 function submitForm() {
   const required = ['f_name','f_email','f_domain','f_template','f_package','f_role'];
   for(let id of required) {
-    if(!document.getElementById(id).value.trim()) { alert('please fill in all required fields *'); return; }
+    if(!document.getElementById(id).value.trim()) {
+      alert('please fill in all required fields *');
+      return;
+    }
   }
   document.getElementById('formBody').style.display = 'none';
   document.getElementById('successScreen').classList.add('show');
@@ -618,22 +555,62 @@ const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
 const starList = [];
-for(let i=0;i<80;i++) starList.push({ x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.5+0.5, a:Math.random(), speed:Math.random()*0.02+0.005 });
+for(let i=0;i<80;i++) {
+  starList.push({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    r: Math.random()*1.5+0.5,
+    a: Math.random(),
+    speed: Math.random()*0.02+0.005
+  });
+}
+
 function drawStars() {
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  starList.forEach(s=>{ s.a+=s.speed; const alpha=(Math.sin(s.a)+1)/2; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle=`rgba(255,255,255,${alpha*0.7})`; ctx.fill(); });
+  starList.forEach(s => {
+    s.a += s.speed;
+    const alpha = (Math.sin(s.a)+1)/2;
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle = `rgba(255,255,255,${alpha*0.7})`;
+    ctx.fill();
+  });
   requestAnimationFrame(drawStars);
 }
 drawStars();
 
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
 const lines = ['BROWSER BABY v2.0','loading your world...','> remarkable.exe','no calls needed.','click to begin ✦'];
-let li=0,ci=0,txt='';
+let li=0, ci=0, txt='';
 const el=document.getElementById('typedText');
+
 function type(){
-  if(li>=lines.length){li=0;txt='';ci=0;setTimeout(type,2000);return;}
-  if(ci<lines[li].length){txt+=lines[li][ci];el.innerHTML=txt+'<span class="cursor"></span>';ci++;setTimeout(type,60);}
-  else{setTimeout(()=>{txt+='\n';li++;ci=0;type();},800);}
+  if(li>=lines.length){
+    li=0; txt=''; ci=0;
+    setTimeout(type,2000);
+    return;
+  }
+  if(ci<lines[li].length){
+    txt += lines[li][ci];
+    el.innerHTML = txt + '<span class="cursor"></span>';
+    ci++;
+    setTimeout(type,60);
+  } else {
+    setTimeout(() => {
+      txt += '\n';
+      li++;
+      ci=0;
+      type();
+    },800);
+  }
 }
 type();
 </script>
+</body>
+</html>
