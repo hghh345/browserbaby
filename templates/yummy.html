@@ -22,7 +22,21 @@
 
     a { color: inherit; text-decoration: none; }
 
-    /* ADD TO CART ENTRY SCREEN */
+    .bb-home {
+      position: fixed;
+      top: 46px;
+      left: 16px;
+      z-index: 9999999;
+      background: #fff8ae;
+      color: #111;
+      border: 3px solid #111;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 900;
+      font-size: 13px;
+      box-shadow: 4px 4px 0 #111;
+    }
+
     .entry-screen {
       position: fixed;
       inset: 0;
@@ -43,193 +57,200 @@
       pointer-events: none;
     }
 
-    .entry-noise {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: .18;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,.7) 0 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
-      background-size: 5px 5px, 22px 22px;
-      mix-blend-mode: screen;
-    }
-
-    .entry-wrap {
-      width: min(1060px, 100%);
-      min-height: 650px;
+    .draw-world {
       position: relative;
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 48px; /* increased spacing */
-      align-items: start;
-    }
-
-    .entry-copy { position: relative; z-index: 2; }
-
-    .entry-kicker {
-      display: flex;
-      justify-content: space-between;
-      font-family: "Courier New", monospace;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      margin-bottom: 18px;
-      opacity: .9;
-    }
-
-    .entry-title {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-style: italic;
-      font-size: clamp(72px, 13vw, 176px);
-      line-height: .78;
-      letter-spacing: -0.09em;
-      text-shadow: 0 0 16px rgba(255,255,255,.34);
-      position: relative;
-      z-index: 2;
-    }
-
-    .entry-fruit {
-      position: absolute;
-      width: min(520px, 70vw);
-      aspect-ratio: 1;
-      border-radius: 50%;
-      left: 25%;
-      bottom: 16px;
-      transform: translateX(-50%);
-      background:
-        radial-gradient(circle at 44% 40%, rgba(255,255,255,.22) 0 2%, transparent 22%),
-        radial-gradient(circle at 52% 53%, #ff563e 0 55%, #e73223 56% 68%, #a91f18 69% 100%);
-      border: 3px solid rgba(0,0,0,.15);
-      box-shadow: inset -25px -32px 0 rgba(70,0,0,.25), 0 20px 60px rgba(0,0,0,.25);
-      z-index: 1;
+      width: 100%;
+      min-height: 100vh;
       overflow: hidden;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,.08), transparent 35%),
+        linear-gradient(180deg, #2450d8 0%, #1538a6 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
     }
 
-    .entry-fruit::before {
+    .draw-world::before {
       content: "";
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 1.6px);
+      background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 36px 36px;
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    .draw-header {
+      position: absolute;
+      top: 24px;
+      left: 30px;
+      right: 30px;
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+      z-index: 10;
+      font-weight: 900;
+    }
+
+    .draw-copy {
+      text-align: center;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 4;
+    }
+
+    .prompt-sticker {
+      display: inline-block;
+      margin-bottom: 10px;
+      background: #fff36e;
+      color: #111;
+      border: 3px solid #111;
+      padding: 8px 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+      box-shadow: 5px 5px 0 rgba(0,0,0,.18);
+    }
+
+    .draw-title {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: .9;
+      color: #fff;
+      letter-spacing: -0.09em;
+      text-shadow: 0 0 24px rgba(255,255,255,.25);
+    }
+
+    .draw-subtitle {
+      position: relative;
+      z-index: 8;
+      margin-top: 22px;
+      color: #fff;
+      font-size: 16px;
+      text-transform: lowercase;
+    }
+
+    .fruit-sketch {
+      position: absolute;
+      z-index: 3;
+      pointer-events: none;
+      font-size: 42px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,.18));
+      opacity: .9;
+    }
+
+    .sketch-one { top: 150px; left: 320px; transform: rotate(-14deg); }
+    .sketch-two { right: 300px; bottom: 120px; transform: rotate(10deg); }
+    .sketch-three { top: 240px; right: 180px; transform: rotate(-8deg); }
+    .sketch-four { bottom: 110px; left: 140px; transform: rotate(14deg); font-size: 34px; }
+    .sketch-five { top: 170px; right: 320px; transform: rotate(-18deg); font-size: 36px; }
+
+    .giant-tomato {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      left: -140px;
+      bottom: -120px;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,.35) 0 10%, transparent 28%),
+        radial-gradient(circle at 50% 50%, #ff5a4e 0 58%, #dd2f22 59% 76%, #9c1714 77% 100%);
+      box-shadow:
+        inset -18px -24px 0 rgba(90,0,0,.22),
+        0 18px 45px rgba(0,0,0,.28);
+      z-index: 2;
+      opacity: .95;
+    }
+
+    .giant-tomato::before {
+      content: '✦';
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-8deg);
+      color: #2fd15d;
+      font-size: 92px;
+      text-shadow: 0 3px 0 #157532;
+    }
+
+    .giant-tomato::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background-image: radial-gradient(circle, rgba(255,255,255,.8) 0 1px, transparent 1.5px);
       background-size: 5px 5px;
-      opacity: .46;
+      opacity: .18;
       mix-blend-mode: screen;
     }
 
-    .entry-fruit::after {
-      content: "✦";
-      position: absolute;
-      top: -26px;
-      left: 50%;
-      transform: translateX(-50%) rotate(-8deg);
-      color: #28c846;
-      font-size: 115px;
-      text-shadow: 0 4px 0 #087b21;
-    }
-
-    .entry-instructions {
-      position: relative;
-      z-index: 3;
-      width: fit-content;
-      margin-top: 22px;
-      background: #fff;
-      color: #111;
-      border: 3px solid #111;
-      padding: 13px 18px;
-      font-weight: 900;
-      box-shadow: 7px 7px 0 rgba(0,0,0,.9);
-      transform: rotate(-1deg);
-    }
-
-    .snack-shelf {
-      position: relative;
-      z-index: 4;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(120px, 1fr));
-      gap: 14px;
-      align-self: center;
-    }
-
-    .snack-item {
-      cursor: pointer;
-      border: 3px solid #111;
-      min-height: 118px;
-      padding: 13px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      color: #111;
-      box-shadow: 7px 7px 0 rgba(0,0,0,.9);
-      transition: transform .18s ease, opacity .18s ease, box-shadow .18s ease;
-      user-select: none;
-    }
-
-    .snack-item:hover { transform: translateY(-7px) rotate(-2deg); }
-    .snack-item.added { opacity: .42; transform: scale(.92) rotate(4deg); box-shadow: 2px 2px 0 rgba(0,0,0,.9); pointer-events: none; }
-
-    .snack-item strong {
-      font-size: 21px;
-      line-height: .92;
-      text-transform: uppercase;
-      letter-spacing: -0.05em;
-    }
-
-    .snack-item span {
-      align-self: flex-end;
-      font-size: 35px;
-    }
-
-    .snack-item:nth-child(1) { background: #fff36e; }
-    .snack-item:nth-child(2) { background: #ff7b3d; }
-    .snack-item:nth-child(3) { background: #ffd4e6; }
-    .snack-item:nth-child(4) { background: #f6fff0; }
-
-    .cart-panel {
-      position: relative;
-      width: 100%;
-      background: #f36522;
+    .draw-zone {
+      width: min(760px, 100%);
+      background: #f8f3e8;
       border: 4px solid #111;
-      box-shadow: 10px 10px 0 rgba(0,0,0,.9);
-      padding: 18px;
-      color: #111;
-      transform: rotate(1deg);
+      box-shadow: 10px 10px 0 rgba(0,0,0,.22);
+      position: relative;
+      z-index: 5;
+      overflow: hidden;
     }
 
-    .cart-title {
+    .draw-toolbar {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+      gap: 12px;
+      padding: 14px;
+      border-bottom: 3px solid #111;
+      background: #fff7d6;
     }
 
-    .cart-basket {
-      min-height: 118px;
+    .color-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
       border: 3px solid #111;
-      background:
-        linear-gradient(90deg, rgba(255,255,255,.2) 16px, transparent 17px),
-        linear-gradient(rgba(255,255,255,.2) 16px, transparent 17px),
-        #ff8b42;
-      background-size: 33px 33px;
-      padding: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      align-content: flex-start;
-      gap: 8px;
+      cursor: pointer;
+      transition: transform .15s ease;
     }
 
-    .cart-chip {
-      background: #fff8ae;
-      border: 2px solid #111;
-      border-radius: 999px;
+    .color-dot:hover,
+    .color-dot.active {
+      transform: scale(1.12);
+    }
+
+    .clear-canvas {
+      margin-left: auto;
+      border: 3px solid #111;
+      background: #fff;
       padding: 6px 10px;
-      font-size: 13px;
       font-weight: 900;
-      animation: pop .2s ease both;
+      cursor: pointer;
     }
 
-    @keyframes pop { from { transform: scale(.7); } to { transform: scale(1); } }
+    #fruitCanvas {
+      width: 100%;
+      display: block;
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><g transform="rotate(-25 20 20)"><rect x="16" y="3" width="8" height="7" rx="2" fill="%23ff8fab" stroke="%23111" stroke-width="2"/><rect x="16" y="10" width="8" height="18" fill="%23f4c27a" stroke="%23111" stroke-width="2"/><polygon points="16,28 24,28 20,38" fill="%23333" stroke="%23111" stroke-width="2"/></g></svg>') 4 36, crosshair;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.45), transparent 18%),
+        #fffdf7;
+    }
+
+    .canvas-note {
+      position: absolute;
+      right: 18px;
+      bottom: 16px;
+      background: #fff36e;
+      border: 3px solid #111;
+      padding: 8px 10px;
+      font-weight: 900;
+      transform: rotate(-2deg);
+      box-shadow: 5px 5px 0 rgba(0,0,0,.2);
+    }
 
     .enter-site {
       width: 100%;
@@ -254,15 +275,26 @@
 
     .enter-site.ready:hover { transform: rotate(-2deg) scale(1.03); }
 
-    @keyframes pulse { from { box-shadow: 0 0 0 #fff8ae; } to { box-shadow: 0 0 22px #fff8ae; } }
+    .draw-world .enter-site {
+      position: relative;
+      left: auto;
+      bottom: auto;
+      transform: none;
+      width: 360px;
+      margin-top: 16px;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 8;
+    }
 
-    .cart-note {
-      margin-top: 8px;
-      font-family: "Courier New", monospace;
-      font-size: 11px;
-      text-align: center;
-      text-transform: uppercase;
-      font-weight: 900;
+    .draw-world .enter-site.ready {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @keyframes pulse {
+      from { box-shadow: 0 0 0 #fff8ae; }
+      to { box-shadow: 0 0 22px #fff8ae; }
     }
 
     .marquee {
@@ -281,12 +313,33 @@
       text-transform: uppercase;
     }
 
-    .marquee span { display: inline-block; padding: 9px 0; animation: slide 18s linear infinite; }
-    @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee span {
+      display: inline-block;
+      padding: 9px 0;
+      animation: slide 18s linear infinite;
+    }
 
-    .page { width: min(1120px, calc(100% - 28px)); margin: 0 auto; padding: 72px 0 40px; position: relative; z-index: 1; }
+    @keyframes slide {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
 
-    .hero { min-height: 92vh; display: grid; grid-template-columns: 1fr .8fr; align-items: center; gap: 36px; color: #fff; }
+    .page {
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 72px 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr .8fr;
+      align-items: center;
+      gap: 36px;
+      color: #fff;
+    }
 
     .eyebrow {
       display: inline-block;
@@ -324,7 +377,12 @@
       font-weight: 900;
     }
 
-    .hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
 
     .pill {
       border: 3px solid #111;
@@ -336,21 +394,131 @@
       transition: transform .16s ease, box-shadow .16s ease;
     }
 
-    .pill:hover { transform: translate(3px, 3px) rotate(-2deg); box-shadow: 1px 1px 0 #111; }
-    .pink { background: #ffd0e3; color:#111; } .cream { background: #fff8ae; color:#111; } .brown { background: #351714; color: #fff8ae; } .orange { background: #ff6b1a; color: #fff8ae; }
+    .pill:hover {
+      transform: translate(3px, 3px) rotate(-2deg);
+      box-shadow: 1px 1px 0 #111;
+    }
 
-    .nutrition-card { background: #fff; color:#111; border: 4px solid #111; box-shadow: 12px 12px 0 rgba(0,0,0,.92); padding: 14px; width: min(440px, 100%); transform: rotate(1.5deg); margin-left: auto; position: relative; }
-    .nutrition-title { font-size: clamp(38px, 5vw, 58px); letter-spacing: -0.08em; line-height: .9; font-weight: 900; border-bottom: 15px solid #111; padding-bottom: 8px; margin-bottom: 6px; }
-    .label-row { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; border-bottom: 2px solid #111; font-size: 15px; }
-    .label-row.big { border-bottom: 7px solid #111; font-weight: 900; font-size: 17px; }
-    .label-row.indent { padding-left: 24px; font-size: 14px; }
-    .daily { text-align: right; font-size: 11px; font-weight: 900; padding: 5px 0; border-bottom: 2px solid #111; }
-    .tiny-note { font-size: 10px; line-height: 1.2; margin-top: 7px; font-family: Georgia, serif; }
+    .pink { background: #ffd0e3; color:#111; }
+    .cream { background: #fff8ae; color:#111; }
+    .brown { background: #351714; color: #fff8ae; }
+    .orange { background: #ff6b1a; color: #fff8ae; }
 
-    .section { margin: 80px 0; background: #fff; border: 4px solid #111; box-shadow: 10px 10px 0 rgba(0,0,0,.82); padding: clamp(22px, 4vw, 44px); position: relative; }
-    .section-title { font-size: clamp(36px, 6vw, 76px); line-height: .86; letter-spacing: -0.08em; text-transform: uppercase; margin-bottom: 24px; }
+    .nutrition-card {
+      background: #fff;
+      color:#111;
+      border: 4px solid #111;
+      box-shadow: 12px 12px 0 rgba(0,0,0,.92);
+      padding: 14px;
+      width: min(440px, 100%);
+      transform: rotate(1.5deg);
+      margin-left: auto;
+      position: relative;
+    }
 
-    .basket-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; }
+    .nutrition-title {
+      font-size: clamp(38px, 5vw, 58px);
+      letter-spacing: -0.08em;
+      line-height: .9;
+      font-weight: 900;
+      border-bottom: 15px solid #111;
+      padding-bottom: 8px;
+      margin-bottom: 6px;
+    }
+
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 6px 0;
+      border-bottom: 2px solid #111;
+      font-size: 15px;
+    }
+
+    .label-row.big {
+      border-bottom: 7px solid #111;
+      font-weight: 900;
+      font-size: 17px;
+    }
+
+    .label-row.indent {
+      padding-left: 24px;
+      font-size: 14px;
+    }
+
+    .daily {
+      text-align: right;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 5px 0;
+      border-bottom: 2px solid #111;
+    }
+
+    .tiny-note {
+      font-size: 10px;
+      line-height: 1.2;
+      margin-top: 7px;
+      font-family: Georgia, serif;
+    }
+
+    .section {
+      margin: 80px 0;
+      background: #fff;
+      border: 4px solid #111;
+      box-shadow: 10px 10px 0 rgba(0,0,0,.82);
+      padding: clamp(22px, 4vw, 44px);
+      position: relative;
+    }
+
+    .section-title {
+      font-size: clamp(36px, 6vw, 76px);
+      line-height: .86;
+      letter-spacing: -0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .product-label {
+      max-width: 720px;
+      background: #fff;
+      border: 4px solid #111;
+      padding: 22px;
+      box-shadow: 10px 10px 0 rgba(0,0,0,.3);
+      font-family: "Courier New", monospace;
+    }
+
+    .label-header {
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 14px;
+      border-bottom: 3px solid #111;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+
+    .label-text {
+      font-weight: 900;
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    .label-footer {
+      border-top: 3px solid #111;
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .basket-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 15px;
+    }
+
     .basket-item {
       min-height: 110px;
       border: 3px solid #111;
@@ -382,175 +550,273 @@
     .basket-item:hover {
       transform: translateY(-7px) rotate(-3deg) scale(1.05);
     }
-    .basket-item:nth-child(1), .basket-item:nth-child(4) { grid-column: span 2; background: #ff4d4d; color: #fff8ae; }
-    .basket-item:nth-child(1) { border-radius: 50% 50% 45% 55% / 55% 45% 60% 40%; } /* apple */
-    .basket-item:nth-child(4) { border-radius: 60% 40% 60% 40% / 60% 50% 50% 40%; } /* tomato */
-    .basket-item:nth-child(2), .basket-item:nth-child(5) { grid-column: span 2; background: #ffd84d; }
-    .basket-item:nth-child(2) { border-radius: 60% 40% 60% 40% / 40% 60% 40% 60%; } /* lemon */
-    .basket-item:nth-child(5) { border-radius: 50% 60% 50% 60% / 60% 50% 60% 50%; }
-    .basket-item:nth-child(3), .basket-item:nth-child(6) { grid-column: span 2; background: #ff99cc; }
-    .basket-item:nth-child(3) { border-radius: 55% 45% 60% 40% / 60% 40% 55% 45%; } /* strawberry */
-    .basket-item:nth-child(6) { border-radius: 45% 55% 40% 60% / 50% 60% 40% 50%; }
-    .basket-item:nth-child(7), .basket-item:nth-child(8) { grid-column: span 3; background: #ff914d; color: #fff8ae; }
-    .basket-item:nth-child(7) { border-radius: 60% 40% 55% 45% / 45% 55% 50% 50%; }
-    .basket-item:nth-child(8) { border-radius: 40% 60% 50% 50% / 55% 45% 60% 40%; }
 
-    .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .work-card { min-height: 340px; border: 3px solid #111; background: #fff; overflow: hidden; box-shadow: 6px 6px 0 #111; transition: transform .16s ease; }
-    .work-card:hover { transform: rotate(2deg) scale(1.02); }
-    .work-top { height: 230px; display: grid; place-items: center; font-size: 78px; background: #fff36e; border-bottom: 3px solid #111; }
+    .basket-item:nth-child(1), .basket-item:nth-child(4) {
+      grid-column: span 2;
+      background: #ff4d4d;
+      color: #fff8ae;
+    }
+
+    .basket-item:nth-child(1) {
+      border-radius: 50% 50% 45% 55% / 55% 45% 60% 40%;
+    }
+
+    .basket-item:nth-child(4) {
+      border-radius: 60% 40% 60% 40% / 60% 50% 50% 40%;
+    }
+
+    .basket-item:nth-child(2), .basket-item:nth-child(5) {
+      grid-column: span 2;
+      background: #ffd84d;
+    }
+
+    .basket-item:nth-child(2) {
+      border-radius: 60% 40% 60% 40% / 40% 60% 40% 60%;
+    }
+
+    .basket-item:nth-child(5) {
+      border-radius: 50% 60% 50% 60% / 60% 50% 60% 50%;
+    }
+
+    .basket-item:nth-child(3), .basket-item:nth-child(6) {
+      grid-column: span 2;
+      background: #ff99cc;
+    }
+
+    .basket-item:nth-child(3) {
+      border-radius: 55% 45% 60% 40% / 60% 40% 55% 45%;
+    }
+
+    .basket-item:nth-child(6) {
+      border-radius: 45% 55% 40% 60% / 50% 60% 40% 50%;
+    }
+
+    .basket-item:nth-child(7), .basket-item:nth-child(8) {
+      grid-column: span 3;
+      background: #ff914d;
+      color: #fff8ae;
+    }
+
+    .basket-item:nth-child(7) {
+      border-radius: 60% 40% 55% 45% / 45% 55% 50% 50%;
+    }
+
+    .basket-item:nth-child(8) {
+      border-radius: 40% 60% 50% 50% / 55% 45% 60% 40%;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .work-card {
+      min-height: 340px;
+      border: 3px solid #111;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 6px 6px 0 #111;
+      transition: transform .16s ease;
+    }
+
+    .work-card:hover {
+      transform: rotate(2deg) scale(1.02);
+    }
+
+    .work-top {
+      height: 230px;
+      display: grid;
+      place-items: center;
+      font-size: 78px;
+      background: #fff36e;
+      border-bottom: 3px solid #111;
+    }
+
     .work-card:nth-child(2) .work-top { background: #ff7b3d; }
     .work-card:nth-child(3) .work-top { background: #d8f7ff; }
+
     .work-info { padding: 18px; }
-    .work-info h3 { font-size: 24px; line-height: .95; margin-bottom: 8px; }
 
-    .receipt { background: #fffef4; border: 3px dashed #111; padding: 25px; font-family: "Courier New", monospace; box-shadow: 8px 8px 0 rgba(0,0,0,.25); }
-    .receipt-line { display: flex; justify-content: space-between; border-bottom: 1px dotted #111; padding: 9px 0; gap: 18px; }
-    .checkout { text-align: center; background: #ffd0e3; }
-    .checkout .pill { display: inline-block; margin-top: 18px; font-size: 18px; }
-    .footer { color:#fff; text-align: center; font-weight: 900; padding-bottom: 32px; }
-.bb-home {
-  position: fixed;
-  top: 46px;
-  left: 16px;
-  z-index: 9999999;
-  background: #fff8ae;
-  color: #111;
-  border: 3px solid #111;
-  border-radius: 999px;
-  padding: 10px 14px;
-  font-weight: 900;
-  font-size: 13px;
-  box-shadow: 4px 4px 0 #111;
-}
-  @media (max-width: 850px) {
-  .bb-home {
-    top: 48px;
-    left: 12px;
-    font-size: 12px;
-    padding: 8px 12px;
-  }
+    .work-info h3 {
+      font-size: 24px;
+      line-height: .95;
+      margin-bottom: 8px;
+    }
 
-  .entry-screen {
-    padding: 62px 14px 18px;
-    overflow-y: auto;
-    place-items: start center;
-  }
+    .receipt {
+      background: #fffef4;
+      border: 3px dashed #111;
+      padding: 25px;
+      font-family: "Courier New", monospace;
+      box-shadow: 8px 8px 0 rgba(0,0,0,.25);
+    }
 
-  .entry-wrap {
-    min-height: auto;
-    grid-template-columns: 1fr;
-    gap: 22px;
-    padding-top: 0;
-    align-items: start;
-  }
+    .receipt-line {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted #111;
+      padding: 9px 0;
+      gap: 18px;
+    }
 
-  .entry-kicker {
-    margin-top: 8px;
-    font-size: 9px;
-    gap: 8px;
-  }
+    .checkout {
+      text-align: center;
+      background: #ffd0e3;
+    }
 
-  .entry-title {
-    font-size: clamp(54px, 20vw, 92px);
-    line-height: .82;
-    position: relative;
-    z-index: 3;
-  }
+    .checkout .pill {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 18px;
+    }
 
-  .entry-fruit {
-    position: relative;
-    left: auto;
-    bottom: auto;
-    transform: none;
-    width: min(260px, 72vw);
-    margin: -8px auto 8px;
-    z-index: 1;
-  }
+    .footer {
+      color:#fff;
+      text-align: center;
+      font-weight: 900;
+      padding-bottom: 32px;
+    }
 
-  .entry-instructions {
-    margin: 10px auto 0;
-    font-size: 14px;
-    text-align: center;
-    transform: rotate(-1deg);
-  }
+    @media (max-width: 850px) {
+      .bb-home {
+        top: 48px;
+        left: 12px;
+        font-size: 12px;
+        padding: 8px 12px;
+      }
 
-  .snack-shelf {
-    grid-template-columns: repeat(2, 1fr);
-    margin-top: 0;
-    gap: 10px;
-  }
+      .entry-screen {
+        padding: 62px 14px 18px;
+        overflow-y: auto;
+        place-items: start center;
+      }
 
-  .snack-item {
-    min-height: 92px;
-    padding: 10px;
-  }
+      .draw-world {
+        min-height: 100vh;
+        justify-content: flex-start;
+        padding-top: 78px;
+      }
 
-  .snack-item strong {
-    font-size: 17px;
-  }
+      .draw-header {
+        top: 18px;
+        left: 16px;
+        right: 16px;
+        font-size: 12px;
+      }
 
-  .snack-item span {
-    font-size: 28px;
-  }
+      .draw-tag {
+        text-align: right;
+      }
 
-  .cart-panel {
-    transform: rotate(0deg);
-  }
+      .prompt-sticker {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
 
-  .hero {
-    grid-template-columns: 1fr;
-    padding-top: 24px;
-  }
+      .draw-title {
+        font-size: 58px;
+      }
 
-  .nutrition-card {
-    margin: 10px auto 0;
-  }
+      .draw-subtitle {
+        font-size: 18px;
+        margin-top: 18px;
+      }
 
-  .basket-grid,
-  .work-grid {
-    grid-template-columns: 1fr;
-  }
+      .fruit-sketch {
+        font-size: 28px;
+      }
 
-  .basket-item:nth-child(n) {
-    grid-column: auto;
-  }
+      .sketch-one { left: 220px; top: 180px; }
+      .sketch-two { right: 60px; bottom: 120px; }
+      .sketch-three { display:none; }
+      .sketch-four { left: 40px; bottom: 150px; }
+      .sketch-five { right: 120px; top: 130px; }
 
-  .section {
-    margin: 44px 0;
-  }
-}
+      .giant-tomato {
+        width: 240px;
+        height: 240px;
+        left: -70px;
+        bottom: -20px;
+      }
+
+      .draw-zone {
+        width: 100%;
+      }
+
+      #fruitCanvas {
+        height: 300px;
+      }
+
+      .draw-world .enter-site {
+        width: 100%;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 24px;
+      }
+
+      .nutrition-card {
+        margin: 10px auto 0;
+      }
+
+      .basket-grid,
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .basket-item:nth-child(n) {
+        grid-column: auto;
+      }
+
+      .section {
+        margin: 44px 0;
+      }
+    }
   </style>
 </head>
+
 <body class="locked">
   <a href="https://www.browserbaby.site" class="bb-home">
-  ← choose another world
-</a>
-  
+    ← choose another world
+  </a>
+
   <section class="entry-screen" id="entryScreen">
-    <div class="entry-noise"></div>
-    <div class="entry-wrap">
-      <div class="entry-copy">
-        <div class="entry-kicker"><span>2005</span><span>Browser Baby Grocery</span><span>Fresh Drop</span></div>
-        <h1 class="entry-title">curate your flavor</h1>
-        <div class="entry-fruit" aria-hidden="true"></div>
-        <p class="entry-instructions">pick 3 flavors that match your design taste</p>
+    <div class="draw-world">
+      <div class="draw-header">
+        <div class="draw-brand">BROWSER BABY</div>
+        <div class="draw-tag">bad drawings welcome</div>
       </div>
 
-      <div>
-      <div class="snack-shelf" aria-label="Choose flavors">
-        <button class="snack-item" data-item="bold"><strong>bold</strong><span>🍅</span></button>
-        <button class="snack-item" data-item="minimal"><strong>minimal</strong><span>🍋</span></button>
-        <button class="snack-item" data-item="playful"><strong>playful</strong><span>🍓</span></button>
-        <button class="snack-item" data-item="expressive"><strong>expressive</strong><span>🫐</span></button>
+      <div class="draw-copy">
+        <div class="prompt-sticker">today's assignment ✦</div>
+        <h1 class="draw-title">draw me<br>a fruit.</h1>
+        <p class="draw-subtitle" id="fruitPrompt">today's prompt: weird banana</p>
       </div>
 
-      <aside class="cart-panel">
-        <div class="cart-title"><span>flavor basket</span><span id="cartCount">0/3</span></div>
-        <div class="cart-basket" id="cartBasket"></div>
-        <button class="enter-site" id="enterSite">enter site</button>
-        <p class="cart-note">checkout opens when your basket is full</p>
-      </aside>
+      <div class="fruit-sketch sketch-one">🍌</div>
+      <div class="fruit-sketch sketch-two">🍓</div>
+      <div class="fruit-sketch sketch-three">🍐</div>
+      <div class="fruit-sketch sketch-four">🍋</div>
+      <div class="fruit-sketch sketch-five">🍒</div>
+      <div class="giant-tomato"></div>
+
+      <div class="draw-zone">
+        <div class="draw-toolbar">
+          <button class="color-dot active" data-color="#ff2f6d" style="background:#ff2f6d;"></button>
+          <button class="color-dot" data-color="#ff9f1c" style="background:#ff9f1c;"></button>
+          <button class="color-dot" data-color="#ffe45e" style="background:#ffe45e;"></button>
+          <button class="color-dot" data-color="#2ec4b6" style="background:#2ec4b6;"></button>
+          <button class="color-dot" data-color="#ffffff" style="background:#ffffff;"></button>
+          <button class="clear-canvas" id="clearCanvas">clear</button>
+        </div>
+
+        <canvas id="fruitCanvas" width="760" height="380"></canvas>
+        <div class="canvas-note" id="canvasNote">draw anything fruity ✦</div>
+      </div>
+
+      <button class="enter-site" id="enterSite">masterpiece complete ✦ enter site</button>
     </div>
   </section>
 
@@ -590,7 +856,6 @@
       </aside>
     </section>
 
-    <!-- ABOUT ME SECTION -->
     <section class="section" id="about">
       <h2 class="section-title">Product Label / about me</h2>
 
@@ -614,43 +879,6 @@
           <span>artificial vibes: 0%</span>
         </div>
       </div>
-
-      <style>
-        .product-label {
-          max-width: 720px;
-          background: #fff;
-          border: 4px solid #111;
-          padding: 22px;
-          box-shadow: 10px 10px 0 rgba(0,0,0,.3);
-          font-family: "Courier New", monospace;
-        }
-
-        .label-header {
-          text-transform: uppercase;
-          font-weight: 900;
-          font-size: 14px;
-          border-bottom: 3px solid #111;
-          padding-bottom: 8px;
-          margin-bottom: 12px;
-        }
-
-        .label-text {
-          font-weight: 900;
-          font-size: 14px;
-          line-height: 1.4;
-          margin-bottom: 14px;
-        }
-
-        .label-footer {
-          border-top: 3px solid #111;
-          padding-top: 10px;
-          display: flex;
-          justify-content: space-between;
-          font-size: 12px;
-          text-transform: uppercase;
-          font-weight: 900;
-        }
-      </style>
     </section>
 
     <section class="section" id="basket">
@@ -670,9 +898,29 @@
     <section class="section" id="work">
       <h2 class="section-title">My yummiest projects</h2>
       <div class="work-grid">
-        <article class="work-card"><div class="work-top">🍓</div><div class="work-info"><h3>Project One</h3><p>A short juicy description of the project, what you made, and why it worked.</p></div></article>
-        <article class="work-card"><div class="work-top">🍋</div><div class="work-info"><h3>Project Two</h3><p>Use this card for a case study, campaign, portfolio image, or featured service.</p></div></article>
-        <article class="work-card"><div class="work-top">🫐</div><div class="work-info"><h3>Project Three</h3><p>Swap the emoji block for an image when the client sends their photos.</p></div></article>
+        <article class="work-card">
+          <div class="work-top">🍓</div>
+          <div class="work-info">
+            <h3>Project One</h3>
+            <p>A short juicy description of the project, what you made, and why it worked.</p>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <div class="work-top">🍋</div>
+          <div class="work-info">
+            <h3>Project Two</h3>
+            <p>Use this card for a case study, campaign, portfolio image, or featured service.</p>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <div class="work-top">🫐</div>
+          <div class="work-info">
+            <h3>Project Three</h3>
+            <p>Swap the emoji block for an image when the client sends their photos.</p>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -700,39 +948,114 @@
   <footer class="footer">made fresh by Browser Baby ✦ no boring websites allowed</footer>
 
   <script>
-    const snackItems = document.querySelectorAll('.snack-item');
-    const cartBasket = document.getElementById('cartBasket');
-    const cartCount = document.getElementById('cartCount');
+    const canvas = document.getElementById('fruitCanvas');
+    const ctx = canvas.getContext('2d');
     const enterSite = document.getElementById('enterSite');
     const entryScreen = document.getElementById('entryScreen');
     const body = document.body;
-    const addedItems = [];
-    const requiredItems = 3;
+    const note = document.getElementById('canvasNote');
+    const clearBtn = document.getElementById('clearCanvas');
+    const colorDots = document.querySelectorAll('.color-dot');
 
-    snackItems.forEach((item) => {
-      item.addEventListener('click', () => {
-        if (addedItems.length >= requiredItems || item.classList.contains('added')) return;
+    let drawing = false;
+    let hasDrawn = false;
+    let currentColor = '#ff2f6d';
 
-        const itemName = item.dataset.item;
-        addedItems.push(itemName);
-        item.classList.add('added');
+    const prompts = [
+      "today's prompt: weird banana",
+      "today's prompt: ugly cherry",
+      "today's prompt: dramatic strawberry",
+      "today's prompt: suspicious peach",
+      "today's prompt: sad lemon",
+      "today's prompt: emotionally unavailable pear",
+      "today's prompt: diva tomato",
+      "today's prompt: overworked blueberry"
+    ];
 
-        const chip = document.createElement('div');
-        chip.className = 'cart-chip';
-        chip.textContent = itemName;
-        cartBasket.appendChild(chip);
+    const randomResponses = [
+      'beautiful. ✦',
+      'very ripe.',
+      'interesting choice.',
+      'museum quality.',
+      'perfect produce.',
+      'the fruit understands you.',
+      'excellent instincts.',
+      'this belongs in a grocery store.'
+    ];
 
-        cartCount.textContent = `${addedItems.length}/${requiredItems}`;
+    const promptElement = document.getElementById('fruitPrompt');
+    promptElement.textContent = prompts[Math.floor(Math.random() * prompts.length)];
 
-        if (addedItems.length === requiredItems) {
-          enterSite.classList.add('ready');
-          enterSite.textContent = 'checkout complete — enter site';
-        }
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = 8;
+    ctx.strokeStyle = currentColor;
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+      return {
+        x: (clientX - rect.left) * (canvas.width / rect.width),
+        y: (clientY - rect.top) * (canvas.height / rect.height)
+      };
+    }
+
+    function startDraw(e) {
+      e.preventDefault();
+      drawing = true;
+      const pos = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+    }
+
+    function draw(e) {
+      if (!drawing) return;
+      e.preventDefault();
+
+      const pos = getPos(e);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+
+      if (!hasDrawn) {
+        hasDrawn = true;
+        note.textContent = randomResponses[Math.floor(Math.random() * randomResponses.length)];
+        enterSite.classList.add('ready');
+      }
+    }
+
+    function endDraw() {
+      drawing = false;
+    }
+
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', endDraw);
+    canvas.addEventListener('mouseleave', endDraw);
+
+    canvas.addEventListener('touchstart', startDraw, { passive: false });
+    canvas.addEventListener('touchmove', draw, { passive: false });
+    canvas.addEventListener('touchend', endDraw);
+
+    colorDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        colorDots.forEach(d => d.classList.remove('active'));
+        dot.classList.add('active');
+        currentColor = dot.dataset.color;
+        ctx.strokeStyle = currentColor;
       });
     });
 
+    clearBtn.addEventListener('click', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hasDrawn = false;
+      note.textContent = 'draw anything fruity ✦';
+      enterSite.classList.remove('ready');
+    });
+
     enterSite.addEventListener('click', () => {
-      if (addedItems.length < requiredItems) return;
+      if (!hasDrawn) return;
       entryScreen.classList.add('hidden');
       body.classList.remove('locked');
     });
