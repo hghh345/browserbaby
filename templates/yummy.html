@@ -1082,12 +1082,15 @@
       enterSite.classList.remove('ready');
     });
 
-    enterSite.addEventListener('click', () => {
-      if (!hasDrawn) return;
-      entryScreen.classList.add('hidden');
-      body.classList.remove('locked');
-    });
+  enterSite.addEventListener('click', () => {
+  if (!hasDrawn) return;
+  entryScreen.classList.add('hidden');
+  body.classList.remove('locked');
 
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 50);
+});
     const backBtn = document.getElementById('backToStart');
     backBtn.addEventListener('click', () => {
       entryScreen.classList.remove('hidden');
