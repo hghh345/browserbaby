@@ -229,12 +229,12 @@
     text-shadow: 6px 6px 0 var(--black);
   }
 
-  .intro-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 22px;
-    align-items: stretch;
-  }
+ .intro-grid {
+  display: grid;
+  grid-template-columns: 0.7fr 1.2fr 0.8fr;
+  gap: 22px;
+  align-items: stretch;
+}
 
   .about-box, .quick-box, .section-card, .project-card {
     background: white;
@@ -330,6 +330,31 @@
     font-size: 28px;
     font-weight: 900;
   }
+ .profile-card {
+  background: white;
+  border: 3px solid var(--black);
+  box-shadow: 6px 6px 0 var(--black);
+  border-radius: 26px;
+  padding: 14px 14px 28px;
+  transform: rotate(-3deg);
+  align-self: start;
+}
+
+.profile-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1.1;
+  object-fit: cover;
+  border: 3px solid var(--black);
+  border-radius: 18px;
+  display: block;
+}
+
+.profile-card span {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 900;
+}
 
   @media (max-width: 800px) {
     .intro-grid, .project-grid, .two-col { grid-template-columns: 1fr; }
@@ -435,6 +460,11 @@
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0 #050505;
 }
+ .profile-card {
+  transform: rotate(-2deg);
+  max-width: 260px;
+  margin: 0 auto;
+}
 </style>
 </head>
 
@@ -482,6 +512,10 @@
       <span class="eyebrow">portfolio unlocked</span>
       <h1 class="portfolio-title">Good Thing You Found Bernice.</h1>
       <div class="intro-grid">
+       <div class="profile-card">
+  <img src="profilephoto1.jpg" alt="Bernice profile photo">
+  <span>Bernice found ✨</span>
+</div>
         <div class="about-box" id="about">
           <span class="eyebrow">ABOUT</span>
           <p>Bernice is a designer, visual thinker, and virtual world-builder creating identities, digital experiences, and visual systems that feel clear, memorable, and a little bit magnetic.</p>
