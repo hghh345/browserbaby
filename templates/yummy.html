@@ -697,7 +697,38 @@
       font-weight: 900;
       padding-bottom: 32px;
     }
+.hero-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
 
+.kofi-photo {
+  width: min(360px, 100%);
+  position: relative;
+  z-index: 2;
+}
+
+.kofi-photo img {
+  width: 100%;
+  display: block;
+  filter: drop-shadow(12px 14px 0 rgba(0,0,0,.28));
+}
+
+.nutrition-card {
+  margin-left: 0;
+}
+
+@media (max-width: 850px) {
+  .hero-visual {
+    width: 100%;
+  }
+
+  .kofi-photo {
+    width: min(320px, 95%);
+  }
+}
     @media (max-width: 850px) {
       .bb-home {
         top: 48px;
