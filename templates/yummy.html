@@ -976,114 +976,117 @@
   <footer class="footer">made fresh by Browser Baby ✦ no boring websites allowed</footer>
 
   <script>
-    const canvas = document.getElementById('fruitCanvas');
-    const ctx = canvas.getContext('2d');
-    const enterSite = document.getElementById('enterSite');
-    const entryScreen = document.getElementById('entryScreen');
-    const  = document.body;
-    const note = document.getElementById('canvasNote');
-    const clearBtn = document.getElementById('clearCanvas');
-    const colorDots = document.querySelectorAll('.color-dot');
+const canvas = document.getElementById('fruitCanvas');
+const ctx = canvas.getContext('2d');
+const enterSite = document.getElementById('enterSite');
+const entryScreen = document.getElementById('entryScreen');
+const body = document.body;
+const note = document.getElementById('canvasNote');
+const clearBtn = document.getElementById('clearCanvas');
+const colorDots = document.querySelectorAll('.color-dot');
 
-    let drawing = false;
-    let hasDrawn = false;
-    let currentColor = '#ff2f6d';
+let drawing = false;
+let hasDrawn = false;
+let currentColor = '#ff2f6d';
 
-    const prompts = [
-      "today's prompt: weird banana",
-      "today's prompt: ugly cherry",
-      "today's prompt: dramatic strawberry",
-      "today's prompt: suspicious peach",
-      "today's prompt: sad lemon",
-      "today's prompt: emotionally unavailable pear",
-      "today's prompt: diva tomato",
-      "today's prompt: overworked blueberry"
-    ];
+const prompts = [
+  "today's prompt: weird banana",
+  "today's prompt: ugly cherry",
+  "today's prompt: dramatic strawberry",
+  "today's prompt: suspicious peach",
+  "today's prompt: sad lemon",
+  "today's prompt: emotionally unavailable pear",
+  "today's prompt: diva tomato",
+  "today's prompt: overworked blueberry"
+];
 
-    const randomResponses = [
-      'beautiful. ✦',
-      'very ripe.',
-      'interesting choice.',
-      'museum quality.',
-      'perfect produce.',
-      'the fruit understands you.',
-      'excellent instincts.',
-      'this belongs in a grocery store.'
-    ];
+const randomResponses = [
+  'beautiful. ✦',
+  'very ripe.',
+  'interesting choice.',
+  'museum quality.',
+  'perfect produce.',
+  'the fruit understands you.',
+  'excellent instincts.',
+  'this belongs in a grocery store.'
+];
 
-    const promptElement = document.getElementById('fruitPrompt');
-    promptElement.textContent = prompts[Math.floor(Math.random() * prompts.length)];
+const promptElement = document.getElementById('fruitPrompt');
+promptElement.textContent =
+  prompts[Math.floor(Math.random() * prompts.length)];
 
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.lineWidth = 8;
+ctx.lineCap = 'round';
+ctx.lineJoin = 'round';
+ctx.lineWidth = 8;
+ctx.strokeStyle = currentColor;
+
+function getPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+  return {
+    x: (clientX - rect.left) * (canvas.width / rect.width),
+    y: (clientY - rect.top) * (canvas.height / rect.height)
+  };
+}
+
+function startDraw(e) {
+  e.preventDefault();
+  drawing = true;
+  const pos = getPos(e);
+  ctx.beginPath();
+  ctx.moveTo(pos.x, pos.y);
+}
+
+function draw(e) {
+  if (!drawing) return;
+  e.preventDefault();
+
+  const pos = getPos(e);
+  ctx.lineTo(pos.x, pos.y);
+  ctx.stroke();
+
+  if (!hasDrawn) {
+    hasDrawn = true;
+    note.textContent =
+      randomResponses[Math.floor(Math.random() * randomResponses.length)];
+    enterSite.classList.add('ready');
+  }
+}
+
+function endDraw() {
+  drawing = false;
+}
+
+canvas.addEventListener('mousedown', startDraw);
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', endDraw);
+canvas.addEventListener('mouseleave', endDraw);
+
+canvas.addEventListener('touchstart', startDraw, { passive: false });
+canvas.addEventListener('touchmove', draw, { passive: false });
+canvas.addEventListener('touchend', endDraw);
+
+colorDots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    colorDots.forEach(d => d.classList.remove('active'));
+    dot.classList.add('active');
+    currentColor = dot.dataset.color;
     ctx.strokeStyle = currentColor;
+  });
+});
 
-    function getPos(e) {
-      const rect = canvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+clearBtn.addEventListener('click', () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hasDrawn = false;
+  note.textContent = 'draw anything fruity ✦';
+  enterSite.classList.remove('ready');
+});
 
-      return {
-        x: (clientX - rect.left) * (canvas.width / rect.width),
-        y: (clientY - rect.top) * (canvas.height / rect.height)
-      };
-    }
-
-    function startDraw(e) {
-      e.preventDefault();
-      drawing = true;
-      const pos = getPos(e);
-      ctx.beginPath();
-      ctx.moveTo(pos.x, pos.y);
-    }
-
-    function draw(e) {
-      if (!drawing) return;
-      e.preventDefault();
-
-      const pos = getPos(e);
-      ctx.lineTo(pos.x, pos.y);
-      ctx.stroke();
-
-      if (!hasDrawn) {
-        hasDrawn = true;
-        note.textContent = randomResponses[Math.floor(Math.random() * randomResponses.length)];
-        enterSite.classList.add('ready');
-      }
-    }
-
-    function endDraw() {
-      drawing = false;
-    }
-
-    canvas.addEventListener('mousedown', startDraw);
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mouseup', endDraw);
-    canvas.addEventListener('mouseleave', endDraw);
-
-    canvas.addEventListener('touchstart', startDraw, { passive: false });
-    canvas.addEventListener('touchmove', draw, { passive: false });
-    canvas.addEventListener('touchend', endDraw);
-
-    colorDots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        colorDots.forEach(d => d.classList.remove('active'));
-        dot.classList.add('active');
-        currentColor = dot.dataset.color;
-        ctx.strokeStyle = currentColor;
-      });
-    });
-
-    clearBtn.addEventListener('click', () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      hasDrawn = false;
-      note.textContent = 'draw anything fruity ✦';
-      enterSite.classList.remove('ready');
-    });
-
-  enterSite.addEventListener('click', () => {
+enterSite.addEventListener('click', () => {
   if (!hasDrawn) return;
+
   entryScreen.classList.add('hidden');
   body.classList.remove('locked');
 
@@ -1091,24 +1094,27 @@
     window.scrollTo(0, 0);
   }, 50);
 });
-    const backBtn = document.getElementById('backToStart');
-    backBtn.addEventListener('click', () => {
-      entryScreen.classList.remove('hidden');
-      body.classList.add('locked');
-    });
-  <script>
-document.addEventListener('contextmenu', event => event.preventDefault());
+
+const backBtn = document.getElementById('backToStart');
+
+backBtn.addEventListener('click', () => {
+  entryScreen.classList.remove('hidden');
+  body.classList.add('locked');
+});
+
+document.addEventListener('contextmenu', event => {
+  event.preventDefault();
+});
 
 document.addEventListener('keydown', function(e) {
   if (
     e.key === 'F12' ||
-    (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) ||
+    (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) ||
     (e.ctrlKey && e.key === 'U')
   ) {
     e.preventDefault();
   }
 });
 </script>
-
 </body>
 </html>
