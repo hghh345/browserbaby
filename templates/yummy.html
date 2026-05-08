@@ -417,7 +417,25 @@
       margin-left: auto;
       position: relative;
     }
+.kofi-photo {
+  width: min(430px, 100%);
+  margin: 0 0 24px auto;
+  position: relative;
+  z-index: 2;
+}
 
+.kofi-photo img {
+  width: 100%;
+  display: block;
+  filter: drop-shadow(12px 14px 0 rgba(0,0,0,.28));
+}
+
+@media (max-width: 850px) {
+  .kofi-photo {
+    margin: 20px auto 24px;
+    width: min(330px, 95%);
+  }
+}
     .nutrition-title {
       font-size: clamp(38px, 5vw, 58px);
       letter-spacing: -0.08em;
@@ -823,14 +841,14 @@
   </section>
 
   <div class="marquee">
-    <span>fresh websites daily ✦ add to cart ✦ strategy with extra sauce ✦ browser baby yummy portfolio ✦ fresh websites daily ✦ add to cart ✦ strategy with extra sauce ✦ browser baby yummy portfolio ✦&nbsp;</span>
+    <span> add to cart ✦ websites with extra sauce ✦ browser baby yummy portfolio ✦ add to cart ✦ websites with extra sauce ✦ browser baby yummy portfolio ✦&nbsp;</span>
   </div>
 
   <main class="page">
     <section class="hero" id="top">
       <div class="hero-copy">
         <div class="eyebrow">new template flavor</div>
-        <h1>The Yummy Portfolio</h1>
+        <h1>Kofi's Flavor File</h1>
         <p class="subtitle">A juicy little website for creatives, strategists, stylists, photographers, food girls, event makers, and anyone whose work deserves better packaging.</p>
         <div class="hero-buttons">
           <a class="pill cream" href="#basket">view services</a>
@@ -838,7 +856,9 @@
           <a class="pill brown" href="#checkout">checkout</a>
         </div>
       </div>
-
+<div class="kofi-photo">
+  <img src="profilephoto2.png" alt="Kofi profile image">
+</div>
       <aside class="nutrition-card" aria-label="Nutrition Facts inspired portfolio card">
         <div class="nutrition-title">Nutrition Facts</div>
         <div class="label-row"><span>Serving Size</span><strong>1 Creative</strong></div>
