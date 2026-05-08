@@ -468,6 +468,118 @@
       box-shadow: 6px 6px 0 rgba(68, 34, 89, .22);
     }
 
+    .collage-page {
+  position: relative;
+  min-height: 620px;
+  padding: 32px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 214, 239, .7), transparent 24%),
+    radial-gradient(circle at 85% 25%, rgba(255, 242, 168, .75), transparent 22%),
+    linear-gradient(135deg, #fffdf8, #f8efff);
+}
+
+.collage-title {
+  font-size: clamp(42px, 7vw, 88px);
+  line-height: .85;
+  letter-spacing: -.06em;
+  text-transform: uppercase;
+  max-width: 620px;
+  position: relative;
+  z-index: 3;
+}
+
+.collage-script {
+  font-family: 'Brush Script MT', cursive;
+  font-size: clamp(38px, 6vw, 76px);
+  color: rgba(90, 70, 85, .65);
+  transform: rotate(-4deg);
+  margin-bottom: -8px;
+}
+
+.collage-text {
+  max-width: 520px;
+  margin-top: 22px;
+  font-size: 17px;
+  line-height: 1.45;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(80,40,70,.25);
+  padding: 18px;
+  position: relative;
+  z-index: 3;
+}
+
+.collage-note {
+  position: absolute;
+  right: 38px;
+  top: 72px;
+  width: 190px;
+  padding: 16px;
+  background: #fff2a8;
+  border: 1px solid #7b2e69;
+  transform: rotate(5deg);
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  z-index: 4;
+  box-shadow: 5px 5px 0 rgba(122, 69, 112, .16);
+}
+
+.collage-sticker {
+  position: absolute;
+  font-size: 70px;
+  z-index: 2;
+  filter: drop-shadow(4px 6px 0 rgba(122, 69, 112, .16));
+}
+
+.sticker-one { right: 70px; bottom: 60px; transform: rotate(8deg); }
+.sticker-two { left: 70px; bottom: 70px; transform: rotate(-10deg); }
+.sticker-three { right: 240px; top: 260px; transform: rotate(-6deg); }
+
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 28px;
+  position: relative;
+  z-index: 3;
+}
+
+.mood-card {
+  min-height: 160px;
+  background: white;
+  border: 1px solid rgba(80,40,70,.25);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 16px;
+  font-size: 18px;
+  box-shadow: 6px 6px 0 rgba(122, 69, 112, .14);
+}
+
+@media (max-width: 760px) {
+  .collage-page {
+    min-height: auto;
+    padding: 24px 18px 140px;
+  }
+
+  .collage-note {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-top: 18px;
+    width: 100%;
+    transform: rotate(1deg);
+  }
+
+  .mood-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .collage-sticker {
+    font-size: 46px;
+    opacity: .75;
+  }
+}
     @keyframes logoShimmer {
       0%, 100% {
         transform: translateX(-50%) rotate(-2deg) scale(1);
@@ -673,25 +785,107 @@
     const backBtn = document.getElementById('backToLanding');
     const startupSound = document.getElementById('startupSound');
 
-    const pages = {
-      about: {
-        title: 'about me',
-        html: `<h2>About Me</h2><p>This is where the your story goes. Keep it personal, editorial, and charming. Write something that will make recruiters go, Yes!</p>`
-      },
-      work: {
-        title: 'my work',
-        html: `<h2>My Work</h2><p>Add 2-4 featured projects here. Each one can open into its own case study or mini gallery.</p>`
-      },
-      resume: {
-        title: 'resume',
-        html: `<h2>Resume</h2><p>Add a short resume summary here: role, experience, strongest skills, and what kind of work they are looking for.</p><a class="download-btn" href="files/resume.pdf" target="_blank" rel="noopener">download resume.pdf</a>`
-      },
-      contact: {
-        title: 'contact me',
-        html: `<h2>Contact</h2><p>Email, Instagram, booking links, Substack/Linkedin links can live here. Make it feel like sending a note through cyberspace.</p>`
-      }
-    };
+   const pages = {
+  about: {
+    title: 'about me',
+    html: `
+      <div class="collage-page">
+        <div class="collage-script">meet Julia</div>
+        <h2 class="collage-title">creative technologist with taste</h2>
 
+        <p class="collage-text">
+          Julia builds digital experiences that feel thoughtful, stylish, and impossible to ignore.
+          Part strategist, part internet girl, part systems thinker, she turns ideas into tiny worlds people actually want to click through.
+        </p>
+
+        <div class="collage-note">
+          currently obsessed with:<br>
+          ✦ soft interfaces<br>
+          ✦ weird websites<br>
+          ✦ beautiful systems
+        </div>
+
+        <div class="collage-sticker sticker-one">💿</div>
+        <div class="collage-sticker sticker-two">👜</div>
+        <div class="collage-sticker sticker-three">✨</div>
+      </div>
+    `
+  },
+
+  work: {
+    title: 'my work',
+    html: `
+      <div class="collage-page">
+        <div class="collage-script">selected work</div>
+        <h2 class="collage-title">projects worth opening</h2>
+
+        <div class="mood-grid">
+          <div class="mood-card">PROJECT ONE<br><small>interactive campaign</small></div>
+          <div class="mood-card">PROJECT TWO<br><small>brand world</small></div>
+          <div class="mood-card">PROJECT THREE<br><small>digital experience</small></div>
+        </div>
+
+        <p class="collage-text">
+          Add screenshots, campaign images, moodboards, case studies, or clickable project links here.
+          This page should feel like a magazine spread meets desktop folder.
+        </p>
+
+        <div class="collage-sticker sticker-one">📸</div>
+        <div class="collage-sticker sticker-two">🖱️</div>
+      </div>
+    `
+  },
+
+  resume: {
+    title: 'resume',
+    html: `
+      <div class="collage-page">
+        <div class="collage-script">the receipts</div>
+        <h2 class="collage-title">experience, skills, proof</h2>
+
+        <p class="collage-text">
+          Role: Creative Technologist<br>
+          Skills: Web design, storytelling, digital strategy, visual systems, UX, content, creative direction.
+        </p>
+
+        <div class="collage-note">
+          download the official PDF below ↓
+        </div>
+
+        <a class="download-btn" href="files/resume.pdf" target="_blank" rel="noopener">download resume.pdf</a>
+
+        <div class="collage-sticker sticker-one">🏆</div>
+        <div class="collage-sticker sticker-two">📎</div>
+      </div>
+    `
+  },
+
+  contact: {
+    title: 'contact me',
+    html: `
+      <div class="collage-page">
+        <div class="collage-script">send a note</div>
+        <h2 class="collage-title">let’s make something weird & useful</h2>
+
+        <p class="collage-text">
+          Email: hello@example.com<br>
+          Instagram: @yourhandle<br>
+          LinkedIn: /yourprofile
+        </p>
+
+        <div class="collage-note">
+          available for:<br>
+          ✦ creative tech<br>
+          ✦ digital design<br>
+          ✦ brand worlds
+        </div>
+
+        <div class="collage-sticker sticker-one">💌</div>
+        <div class="collage-sticker sticker-two">☎️</div>
+      </div>
+    `
+  }
+};
     function openDesktop(startWindow) {
       body.classList.add('zooming');
       setTimeout(() => {
