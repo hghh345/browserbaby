@@ -500,14 +500,14 @@
 .collage-text {
   max-width: 520px;
   margin-top: 22px;
-  margin-left:160px
+  margin-left: 180px;
   font-size: 17px;
   line-height: 1.45;
   background: rgba(255,255,255,.72);
   border: 1px solid rgba(80,40,70,.25);
   padding: 18px;
   position: relative;
-  z-index: 3;
+  z-index: 5;
 }
 
 .collage-note {
@@ -559,14 +559,14 @@
 .profile-polaroid {
   position: absolute;
   left: 38px;
-  top: 120px;
-  width: 150px;
+  top: 210px;
+  width: 140px;
   background: #fff;
   padding: 10px 10px 26px;
   transform: rotate(-4deg);
   box-shadow: 8px 8px 0 rgba(122, 69, 112, .12);
   border: 1px solid rgba(80,40,70,.18);
-  z-index: 2;
+  z-index: 4;
 }
 
 .profile-polaroid img {
@@ -604,6 +604,17 @@
     font-size: 46px;
     opacity: .75;
   }
+}
+    .profile-polaroid {
+  position: relative;
+  left: auto;
+  top: auto;
+  width: 150px;
+  margin: 18px auto;
+}
+
+.collage-text {
+  margin-left: 0;
 }
     @keyframes logoShimmer {
       0%, 100% {
