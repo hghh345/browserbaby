@@ -500,6 +500,7 @@
 .collage-text {
   max-width: 520px;
   margin-top: 22px;
+  margin-left:160px
   font-size: 17px;
   line-height: 1.45;
   background: rgba(255,255,255,.72);
@@ -555,7 +556,31 @@
   font-size: 18px;
   box-shadow: 6px 6px 0 rgba(122, 69, 112, .14);
 }
+.profile-polaroid {
+  position: absolute;
+  left: 38px;
+  top: 120px;
+  width: 150px;
+  background: #fff;
+  padding: 10px 10px 26px;
+  transform: rotate(-4deg);
+  box-shadow: 8px 8px 0 rgba(122, 69, 112, .12);
+  border: 1px solid rgba(80,40,70,.18);
+  z-index: 2;
+}
 
+.profile-polaroid img {
+  width: 100%;
+  display: block;
+}
+
+.profile-polaroid span {
+  display: block;
+  margin-top: 8px;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+}
 @media (max-width: 760px) {
   .collage-page {
     min-height: auto;
