@@ -690,26 +690,23 @@
     }
 .hero-visual {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 22px;
 }
 
 .kofi-photo {
-  width: min(360px, 100%);
+  width: min(480px, 100%);
   position: relative;
   z-index: 2;
+  transform: rotate(2deg);
 }
 
 .kofi-photo img {
   width: 100%;
   display: block;
-  filter: drop-shadow(12px 14px 0 rgba(0,0,0,.28));
+  filter: drop-shadow(16px 18px 0 rgba(0,0,0,.28));
 }
 
-.nutrition-card {
-  margin-left: 0;
-}
 
 @media (max-width: 850px) {
   .hero-visual {
@@ -883,23 +880,7 @@
     <img src="profilephoto2.png" alt="Kofi profile image">
   </div>
      
-      <aside class="nutrition-card" aria-label="Nutrition Facts inspired portfolio card">
-        <div class="nutrition-title">Nutrition Facts</div>
-        <div class="label-row"><span>Serving Size</span><strong>1 Creative</strong></div>
-        <div class="label-row"><span>Servings Per Website</span><strong>Unlimited</strong></div>
-        <div class="label-row big"><span>Amount Per Serving</span><strong>1 Brand World</strong></div>
-        <div class="daily">% Daily Value*</div>
-        <div class="label-row"><strong>Total Main Character Energy</strong><strong>100%</strong></div>
-        <div class="label-row indent"><span>Strategy</span><strong>25g</strong></div>
-        <div class="label-row indent"><span>Visual Story</span><strong>30g</strong></div>
-        <div class="label-row"><strong>Internet Flavor</strong><strong>1000%</strong></div>
-        <div class="label-row"><strong>Generic Squarespace Vibe</strong><strong>0%</strong></div>
-        <div class="label-row"><strong>Portfolio Protein</strong><strong>50%</strong></div>
-        <div class="label-row indent"><span>Case Studies</span><strong>10g</strong></div>
-        <div class="label-row indent"><span>Press / Resume</span><strong>10g</strong></div>
-        <div class="label-row big"><span>Contains</span><strong>cute links</strong></div>
-        <p class="tiny-note">*Percent Daily Values are based on your personal brand diet. Your sparkle may be higher or lower depending on your heart needs.</p>
-      </aside>
+    
     </div>
     </section>
 
