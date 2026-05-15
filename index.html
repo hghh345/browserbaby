@@ -673,7 +673,36 @@ function goTo(n) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('s' + n).classList.add('active');
   window.scrollTo(0, 0);
+
+  const hashes = {
+    1: 'home',
+    2: 'maker',
+    3: 'worlds',
+    4: 'fit',
+    5: 'pricing',
+    6: 'apply'
+  };
+
+  if (window.location.hash !== '#' + hashes[n]) {
+    history.replaceState(null, '', '#' + hashes[n]);
+  }
 }
+  const routes = {
+  '#home': 1,
+  '#maker': 2,
+  '#worlds': 3,
+  '#fit': 4,
+  '#pricing': 5,
+  '#apply': 6
+};
+
+function goToHash() {
+  const screen = routes[window.location.hash];
+  if (screen) goTo(screen);
+}
+
+window.addEventListener('DOMContentLoaded', goToHash);
+window.addEventListener('hashchange', goToHash);
 
 const clickComputer = document.getElementById('clickComputer');
 if (clickComputer) {
