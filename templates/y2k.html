@@ -58,7 +58,32 @@
       backdrop-filter: blur(4px);
       box-shadow: 3px 3px 0 rgba(122, 69, 112, .18);
     }
+.bb-nav {
+  position: fixed;
+  top: 54px;
+  left: 18px;
+  z-index: 9999;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
 
+.bb-home,
+.bb-apply {
+  padding: 8px 13px;
+  border: 1px solid #7b2e69;
+  background: rgba(255,255,255,.7);
+  color: #1f1a1d;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  backdrop-filter: blur(4px);
+  box-shadow: 3px 3px 0 rgba(122, 69, 112, .18);
+}
+
+.bb-apply {
+  background: #fff2a8;
+  font-weight: bold;
+}
     .page {
       position: relative;
       z-index: 1;
@@ -556,6 +581,31 @@
   font-size: 18px;
   box-shadow: 6px 6px 0 rgba(122, 69, 112, .14);
 }
+    .world-next {
+  position: relative;
+  z-index: 5;
+  width: min(720px, 92vw);
+  margin: 40px auto 80px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(255,255,255,.78);
+  border: 1px solid #7b2e69;
+  box-shadow: 8px 8px 0 rgba(122, 69, 112, .16);
+  font-family: 'Courier New', monospace;
+}
+
+.world-next p {
+  margin-bottom: 10px;
+}
+
+.world-next a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: #fff2a8;
+  border: 1px solid #7b2e69;
+  font-weight: bold;
+}
 .profile-polaroid {
   position: absolute;
   left: 38px;
@@ -739,9 +789,10 @@
 </head>
 
 <body>
-  <a href="https://www.browserbaby.site" class="bb-home">
-    ← choose another world
-  </a>
+<div class="bb-nav">
+  <a href="../index.html#worlds" class="bb-home">← preview another world</a>
+  <a href="../index.html#pricing" class="bb-apply">see pricing + apply →</a>
+</div>
 
   <audio id="startupSound" preload="auto">
     <source src="sounds/startup.mp3" type="audio/mpeg" />
@@ -809,6 +860,11 @@
         <div class="window-content" id="windowContent"></div>
       </article>
     </main>
+<section class="world-next">
+  <p>You’re previewing one Browser Baby world.</p>
+  <p>Want one built around your portfolio?</p>
+  <a href="../index.html#pricing">See beta details + pricing →</a>
+</section>
   </div>
 
   <script>
