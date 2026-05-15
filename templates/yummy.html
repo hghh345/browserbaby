@@ -19,7 +19,7 @@
       overflow-x: hidden;
     }
 
-    .locked { overflow: hidden; }
+    . { overflow: hidden; }
 
     a { color: inherit; text-decoration: none; }
 
@@ -37,7 +37,31 @@
       font-size: 13px;
       box-shadow: 4px 4px 0 #111;
     }
+.bb-nav {
+  position: fixed;
+  top: 46px;
+  left: 16px;
+  z-index: 9999999;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
 
+.bb-home,
+.bb-apply {
+  background: #fff8ae;
+  color: #111;
+  border: 3px solid #111;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 900;
+  font-size: 13px;
+  box-shadow: 4px 4px 0 #111;
+}
+
+.bb-apply {
+  background: #ff99cc;
+}
     .entry-screen {
       position: fixed;
       inset: 0;
@@ -724,7 +748,19 @@
         font-size: 12px;
         padding: 8px 12px;
       }
+.bb-nav {
+  top: 48px;
+  left: 12px;
+  right: 12px;
+  gap: 8px;
+  align-items: flex-start;
+}
 
+.bb-home,
+.bb-apply {
+  font-size: 11px;
+  padding: 8px 10px;
+}
       .entry-screen {
         padding: 62px 14px 18px;
         overflow-y: auto;
@@ -816,7 +852,7 @@
   </style>
 </head>
 
-< class="locked">
+< body class="locked">
 <div class="bb-nav">
   <a href="../index.html#worlds" class="bb-home">← preview another world</a>
   <a href="../index.html#pricing" class="bb-apply">see pricing + apply →</a>
@@ -970,6 +1006,13 @@
       <p class="subtitle" style="margin-left:auto;margin-right:auto;">This is where the contact form, booking link, or email button goes. Make it feel like adding the creative to cart.</p>
       <a class="pill orange" href="mailto:hello@example.com">add me to cart</a>
     </section>
+    <section class="section checkout" id="browserbaby-next">
+  <h2 class="section-title">Want a world like this?</h2>
+  <p class="subtitle" style="margin-left:auto;margin-right:auto;">
+    You’re previewing one Browser Baby world. If this feels like your vibe, apply for a beta spot.
+  </p>
+  <a class="pill orange" href="../index.html#pricing">see beta details + pricing →</a>
+</section>
   </main>
 
   <button id="backToStart" style="position:fixed;bottom:20px;left:20px;z-index:50;border:3px solid #111;background:#fff;padding:10px 14px;font-weight:900;cursor:pointer;box-shadow:4px 4px 0 #111;">back to start</button>
