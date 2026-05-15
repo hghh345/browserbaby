@@ -28,7 +28,20 @@
     color: var(--black);
     overflow-x: hidden;
   }
+.browserbaby-next {
+  background: var(--pink);
+}
 
+.browserbaby-next a {
+  display: inline-block;
+  margin-top: 14px;
+  background: var(--yellow);
+  border: 3px solid var(--black);
+  border-radius: 999px;
+  padding: 12px 18px;
+  box-shadow: 4px 4px 0 var(--black);
+  text-decoration: none;
+}
   button, a { font-family: inherit; }
 
   .screen {
@@ -401,7 +414,18 @@
     font-size: 15px;
     padding: 14px;
   }
+.bb-nav {
+  left: 12px;
+  right: 12px;
+  gap: 8px;
+  align-items: flex-start;
+}
 
+.bb-home,
+.bb-apply {
+  font-size: 11px;
+  padding: 8px 10px;
+}
   .board {
     width: 100%;
     max-width: 100%;
@@ -436,29 +460,38 @@
     line-height: 1.35;
   }
 }
- .bb-home {
+.bb-nav {
   position: fixed;
   top: 16px;
   left: 16px;
   z-index: 9999;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
 
-  background: #fff9e8;
-  border: 3px solid #050505;
+.bb-home,
+.bb-apply {
+  background: var(--cream);
+  border: 3px solid var(--black);
   border-radius: 999px;
   padding: 10px 16px;
-
-  color: #050505;
+  color: var(--black);
   text-decoration: none;
   font-weight: 900;
   font-size: 14px;
-
-  box-shadow: 4px 4px 0 #050505;
+  box-shadow: 4px 4px 0 var(--black);
   transition: transform 0.12s ease;
 }
 
-.bb-home:hover {
+.bb-apply {
+  background: var(--yellow);
+}
+
+.bb-home:hover,
+.bb-apply:hover {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 #050505;
+  box-shadow: 2px 2px 0 var(--black);
 }
  .profile-card {
   transform: rotate(-2deg);
@@ -574,6 +607,12 @@
       <p>Email Bernice for projects, collaborations, and design magic.</p>
       <a href="mailto:hello@example.com">hello@example.com</a>
     </div>
+     <div class="contact-card browserbaby-next">
+  <span class="eyebrow">BROWSER BABY WORLD PREVIEW</span>
+  <h2>Want a world like this?</h2>
+  <p>You’re previewing one Browser Baby world. If this feels like your vibe, apply for a beta spot.</p>
+  <a href="../index.html#pricing">see beta details + pricing →</a>
+</div>
   </div>
 </section>
 
